@@ -8,10 +8,6 @@ import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.nfc.tech.NfcA;
-import android.nfc.tech.NfcB;
-import android.nfc.tech.NfcF;
-import android.nfc.tech.NfcV;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
@@ -75,36 +71,26 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		course_layout.setOnClickListener(this);
 		found_layout.setOnClickListener(this);
 		settings_layout.setOnClickListener(this);
-		nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-		if (!ifNFCUse()) {
-			return;
-		}
-		// 将被调用的Intent，用于重复被Intent触发后将要执行的跳转
-		pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
-				getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-		// 设定要过滤的标签动作，这里只接收ACTION_NDEF_DISCOVERED类型
-		ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
-		ndef.addCategory("*/*");
-		mFilters = new IntentFilter[] { ndef };// 过滤器
-		mTechLists = new String[][] { new String[] { NfcA.class.getName() },
-				new String[] { NfcF.class.getName() },
-				new String[] { NfcB.class.getName() },
-				new String[] { NfcV.class.getName() } };// 允许扫描的标签类型
-
-		if (isFirst) {
-			if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent()
-					.getAction())) {
-				System.out.println(getIntent().getAction());
-				if (readFromTag(getIntent())) {
-					// ifo_NFC.setText(readResult);
-					System.out.println("1.5...");
-				} else {
-					// ifo_NFC.setText("标签数据为空");
-				}
-			}
-			isFirst = false;
-		}
-		System.out.println("onCreate...");
+		/*
+		 * nfcAdapter = NfcAdapter.getDefaultAdapter(this); if (!ifNFCUse()) {
+		 * return; } // 将被调用的Intent，用于重复被Intent触发后将要执行的跳转 pendingIntent =
+		 * PendingIntent.getActivity(this, 0, new Intent(this,
+		 * getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
+		 * 设定要过滤的标签动作，这里只接收ACTION_NDEF_DISCOVERED类型 ndef = new
+		 * IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+		 * ndef.addCategory("*"); mFilters = new IntentFilter[] { ndef };// 过滤器
+		 * mTechLists = new String[][] { new String[] { NfcA.class.getName() },
+		 * new String[] { NfcF.class.getName() }, new String[] {
+		 * NfcB.class.getName() }, new String[] { NfcV.class.getName() } };//
+		 * 允许扫描的标签类型
+		 * 
+		 * if (isFirst) { if
+		 * (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent() .getAction()))
+		 * { System.out.println(getIntent().getAction()); if
+		 * (readFromTag(getIntent())) { // ifo_NFC.setText(readResult);
+		 * System.out.println("1.5..."); } else { // ifo_NFC.setText("标签数据为空");
+		 * } } isFirst = false; } System.out.println("onCreate...");
+		 */
 	}
 
 	@Override

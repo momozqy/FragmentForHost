@@ -1,5 +1,6 @@
 package com.jay.example.fragmentforhost;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -44,9 +45,10 @@ public class Fragment4 extends Fragment {
 						next.setText("写入");
 						change.setVisibility(View.VISIBLE);
 						label.setHint("文本数据内容：");
+						input.setEnabled(false);
 					} else {
 						// 跳转
-						ft = fManager.beginTransaction();
+						/*ft = fManager.beginTransaction();
 						if (activity.fg5 == null) {
 							activity.fg5 = new Fragment5();
 						}
@@ -54,9 +56,22 @@ public class Fragment4 extends Fragment {
 						if (activity.fg4 != null)
 							ft.remove(activity.fg4);
 						ft.show(activity.fg5);
-						ft.commit();
+						ft.commit();*/
+						Intent in = new Intent();
+						in.setClass(activity, Write2Nfc.class);
+						activity.startActivity(in);
 					}
 				}
+			}
+		});
+		change.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				change.setVisibility(View.INVISIBLE);
+				input.setEnabled(true);
+				next.setText("下一步");
+				label.setText("请输入文本数据:");
 			}
 		});
 		return view;
