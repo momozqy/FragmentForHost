@@ -1,8 +1,6 @@
 *.class
-gen/com/jay/example/fragmentforhost/BuildConfig.java
-gen/com/jay/example/fragmentforhost/R.java
-libs/android-support-v4.jar
-bin/AndroidManifest.xml
-gradle/wrapper/gradle-wrapper.properties
-build/intermediates/gradle_project_sync_data.bin
-gradle/wrapper/gradle-wrapper.jar
+gen
+libs
+bin
+gradle
+build
