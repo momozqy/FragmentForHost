@@ -3,17 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#FAECD8"
+    android:background="@android:color/black"
     android:orientation="vertical" >
     
     <GridView 
         android:id="@+id/gridVew"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:verticalSpacing="10dp" 
-        android:columnWidth="90dp"   
-    	android:horizontalSpacing="10dp" 
-        android:numColumns="auto_fit"
+        android:fadingEdge="none"
+        android:verticalSpacing="2dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:listSelector="@null" 
         ></GridView>
 
 </LinearLayout>

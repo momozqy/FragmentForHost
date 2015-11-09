@@ -21,7 +21,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!--
+            
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" ></action>
                 
@@ -30,13 +30,15 @@
                 <data android:mimeType="text/plain" >
                 </data>
             </intent-filter>
-            -->
+           
         </activity>
         <activity
             android:name="com.jay.example.fragmentforhost.Write2Nfc"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"  
+            android:launchMode="singleTop"
             android:label="@string/title_activity_write2_nfc" >
         </activity>
     </application>
-<!--     <uses-permission android:name="android.permission.NFC" /> -->
+    <uses-permission android:name="android.permission.NFC" />
 
 </manifest>

@@ -8,6 +8,10 @@ import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.tech.NfcA;
+import android.nfc.tech.NfcB;
+import android.nfc.tech.NfcF;
+import android.nfc.tech.NfcV;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
@@ -15,18 +19,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.jay.example.db.DataSQLiteHelper;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
-
+	
+	public DataSQLiteHelper dh ;
 	public Fragment1 fg1;
 	public Fragment2 fg2;
 	public Fragment3 fg3;
 	public Fragment4 fg4;
-	public Fragment5 fg5;
+	public Animal fg5;
 	public NfcAdapter nfcAdapter;
 	private FrameLayout flayout;
 	public String readResult = "";
@@ -49,10 +58,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	private int gray = 0xFF7597B3;
 	private int blue = 0xFF0AB2FB;
 	FragmentManager fManager;
-
+	public DataSQLiteHelper getDataSQLiteHelper(){
+		if(dh==null)
+			dh = new DataSQLiteHelper(MainActivity.this,"zqydb");
+			return dh;
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		fManager = getSupportFragmentManager();
 		initViews();
@@ -71,26 +85,39 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		course_layout.setOnClickListener(this);
 		found_layout.setOnClickListener(this);
 		settings_layout.setOnClickListener(this);
-		/*
-		 * nfcAdapter = NfcAdapter.getDefaultAdapter(this); if (!ifNFCUse()) {
-		 * return; } // 将被调用的Intent，用于重复被Intent触发后将要执行的跳转 pendingIntent =
-		 * PendingIntent.getActivity(this, 0, new Intent(this,
-		 * getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
-		 * 设定要过滤的标签动作，这里只接收ACTION_NDEF_DISCOVERED类型 ndef = new
-		 * IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
-		 * ndef.addCategory("*"); mFilters = new IntentFilter[] { ndef };// 过滤器
-		 * mTechLists = new String[][] { new String[] { NfcA.class.getName() },
-		 * new String[] { NfcF.class.getName() }, new String[] {
-		 * NfcB.class.getName() }, new String[] { NfcV.class.getName() } };//
-		 * 允许扫描的标签类型
-		 * 
-		 * if (isFirst) { if
-		 * (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent() .getAction()))
-		 * { System.out.println(getIntent().getAction()); if
-		 * (readFromTag(getIntent())) { // ifo_NFC.setText(readResult);
-		 * System.out.println("1.5..."); } else { // ifo_NFC.setText("标签数据为空");
-		 * } } isFirst = false; } System.out.println("onCreate...");
-		 */
+
+		nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+		if (!ifNFCUse()) {
+			System.out.println("is not use");
+		} // 将被调用的Intent，用于重复被Intent触发后将要执行的跳转 
+		pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass())
+				.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
+		System.out.println("pengdinng Intent");
+		// * 设定要过滤的标签动作，这里只接收ACTION_NDEF_DISCOVERED类型
+		ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+		System.out.println("ndef");
+		ndef.addCategory("*");
+		mFilters = new IntentFilter[] { ndef };// 过滤器
+		mTechLists = new String[][] { new String[] { NfcA.class.getName() },
+				new String[] { NfcF.class.getName() },
+				new String[] { NfcB.class.getName() },
+				new String[] { NfcV.class.getName() } };
+		// 允许扫描的标签类型
+
+		if (isFirst) {
+			if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent()
+					.getAction())) {
+				System.out.println(getIntent().getAction());
+				if (readFromTag(getIntent())) { // ifo_NFC.setText(readResult);
+					System.out.println("1.5...");
+				} else { 
+					Toast.makeText(this, readResult, Toast.LENGTH_SHORT).show();
+				}
+			}
+			isFirst = false;
+		}
+		System.out.println("onCreate...");
+
 	}
 
 	@Override
@@ -241,4 +268,39 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		}
 		return false;
 	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+//		 前台分发系统,这里的作用在于第二次检测NFC标签时该应用有最高的捕获优先权.
+				nfcAdapter.enableForegroundDispatch(this, pendingIntent, mFilters,
+						mTechLists);
+
+				System.out.println("onResume...");
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		nfcAdapter.disableForegroundDispatch(this);
+		System.out.println("onPause...");
+	}
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+		System.out.println("onNewIntent1...");
+		System.out.println(intent.getAction());
+		if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())
+				|| NfcAdapter.ACTION_TECH_DISCOVERED.equals(intent.getAction())) {
+			System.out.println("onNewIntent2...");
+			if (readFromTag(intent)) {
+				Toast.makeText(this, readResult, Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(this, "标签为空", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+	}
+
 }

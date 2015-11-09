@@ -48,17 +48,17 @@ public class Fragment4 extends Fragment {
 						input.setEnabled(false);
 					} else {
 						// 跳转
-						/*ft = fManager.beginTransaction();
-						if (activity.fg5 == null) {
-							activity.fg5 = new Fragment5();
-						}
-						ft.add(R.id.content, activity.fg5);
-						if (activity.fg4 != null)
-							ft.remove(activity.fg4);
-						ft.show(activity.fg5);
-						ft.commit();*/
+						/*
+						 * ft = fManager.beginTransaction(); if (activity.fg5 ==
+						 * null) { activity.fg5 = new Fragment5(); }
+						 * ft.add(R.id.content, activity.fg5); if (activity.fg4
+						 * != null) ft.remove(activity.fg4);
+						 * ft.show(activity.fg5); ft.commit();
+						 */
 						Intent in = new Intent();
 						in.setClass(activity, Write2Nfc.class);
+						in.putExtra("content", input.getText().toString()
+								.trim());
 						activity.startActivity(in);
 					}
 				}
