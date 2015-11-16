@@ -16,10 +16,6 @@ import android.widget.GridView;
 public class Fragment1 extends Fragment {
 	MainActivity activity;
 	private GridView gridView;
-	private String[] titles = new String[] { "美女卷珠帘", "美女回眸", "美女很有趣", "美女醉酒",
-			"美女微笑", "美女如脱兔", "美女柳叶弯眉" };
-	private String[] description = new String[] { "啦啦啦", "嘎嘎嘎", "哇哇哇", "喵喵喵",
-			"刚刚刚", "当当当", "咔咔咔" };
 	private int[] images = { R.drawable.anim, R.drawable.apparel,
 			R.drawable.auto, R.drawable.beauty, R.drawable.electrical,
 			R.drawable.food, R.drawable.forestry, R.drawable.house,
@@ -76,6 +72,13 @@ public class Fragment1 extends Fragment {
 					case 9:
 						break;
 					case 10:
+						if(activity.fg6==null){
+							activity.fg6 = new CustomMade();
+						}
+						ft.add(R.id.content, activity.fg6);
+						ft.hide(activity.fg1);
+						ft.show(activity.fg6);
+						ft.commit();
 						break;
 					case 11:
 						break;
