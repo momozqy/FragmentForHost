@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 bin/classes/com/jay/example/fragmentforhost/R$string.class
 *.class
 libs
 gen
 .idea
 bin
+=======
+*.class
+gen
+libs
+bin
+gradle
+build
+>>>>>>> origin/master
