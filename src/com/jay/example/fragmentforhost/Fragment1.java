@@ -47,8 +47,8 @@ public class Fragment1 extends Fragment {
 					case 0:
 						if(activity.fg5==null){
 							activity.fg5 = new Animal();
+							ft.add(R.id.content, activity.fg5);
 						}
-						ft.add(R.id.content, activity.fg5);
 						ft.hide(activity.fg1);
 						ft.show(activity.fg5);
 						ft.commit();
@@ -74,8 +74,14 @@ public class Fragment1 extends Fragment {
 					case 10:
 						if(activity.fg6==null){
 							activity.fg6 = new CustomMade();
+							ft.add(R.id.content, activity.fg6);
 						}
-						ft.add(R.id.content, activity.fg6);
+						else{
+							ft.remove(activity.fg6);
+							activity.fg6 = new CustomMade();
+							ft.add(R.id.content, activity.fg6);
+						}
+						
 						ft.hide(activity.fg1);
 						ft.show(activity.fg6);
 						ft.commit();

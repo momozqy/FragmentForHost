@@ -72,7 +72,7 @@ public class CustomMade extends Fragment implements OnClickListener {
 				if (next.getText().toString().equals("下一步")) {
 					next.setText("写入");
 					for(int i=0;i<textList.size();i++){
-						textList.get(i).setEnabled(true);
+						textList.get(i).setEnabled(false);
 					}
 					change.setVisibility(View.VISIBLE);
 					save.setVisibility(View.VISIBLE);
@@ -122,6 +122,7 @@ public class CustomMade extends Fragment implements OnClickListener {
 		for(int i=0;i<textList.size();i++){
 			textList.get(i).setEnabled(true);
 		}
+		next.setText("下一步");
 	}
 	public void addView(){
 		LinearLayout data = new LinearLayout(mActivity);

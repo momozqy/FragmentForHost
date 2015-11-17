@@ -2,18 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:id="@+id/datass"
-            android:layout_width="fill_parent"
-            android:layout_height="200dp"
-            android:orientation="vertical" >
-
-            <RelativeLayout
+	  <RelativeLayout
                 android:id="@+id/title2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -38,27 +27,19 @@
                     android:textColor="@android:color/white"
                     android:textSize="25sp" />
             </RelativeLayout>
+    
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_below="@id/title2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
-            <LinearLayout
-                android:id="@+id/data11"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal" >
+        <LinearLayout
+            android:id="@+id/datass"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-                <EditText
-                    android:id="@+id/name1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:enabled="true"
-                	/>
-
-                <EditText
-                    android:id="@+id/namec1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -81,7 +62,6 @@
         android:layout_gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="150dp"
         android:text="修改"
         android:visibility="invisible" />
      <Button
