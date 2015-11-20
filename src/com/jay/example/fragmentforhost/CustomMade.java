@@ -47,6 +47,7 @@ public class CustomMade extends Fragment implements OnClickListener {
 		next = (Button) view.findViewById(R.id.next1);
 		change = (Button) view.findViewById(R.id.change1);
 		save = (Button) view.findViewById(R.id.save);
+		dh = mActivity.getDataSQLiteHelper();
 		next.setOnClickListener(this);
 		add.setOnClickListener(this);
 		change.setOnClickListener(this);
