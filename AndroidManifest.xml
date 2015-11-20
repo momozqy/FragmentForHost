@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.jay.example.fragmentforhost.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +37,8 @@
             android:name="com.jay.example.fragmentforhost.Write2Nfc"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"  
             android:launchMode="singleTop"
-            android:label="@string/title_activity_write2_nfc" >
+            android:label="@string/title_activity_write2_nfc" 
+            android:screenOrientation="portrait">
         </activity>
     </application>
     <uses-permission android:name="android.permission.NFC" />
