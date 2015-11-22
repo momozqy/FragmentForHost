@@ -2,44 +2,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-	  <RelativeLayout
-                android:id="@+id/title2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/top_bg" >
 
-                <TextView
-                    android:id="@+id/biaot2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="定制"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp" />
+    <RelativeLayout
+        android:id="@+id/title2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_bg" >
 
-                <TextView
-                    android:id="@+id/add"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:text="添加"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp" />
-            </RelativeLayout>
-    
+        <TextView
+            android:id="@+id/biaot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="定制"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="添加"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
     <ScrollView
         android:id="@+id/scroll"
-        android:layout_below="@id/title2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title2" >
 
         <LinearLayout
             android:id="@+id/datass"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
         </LinearLayout>
     </ScrollView>
 
@@ -64,7 +64,8 @@
         android:layout_marginRight="20dp"
         android:text="修改"
         android:visibility="invisible" />
-     <Button
+
+    <Button
         android:id="@+id/save"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

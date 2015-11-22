@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.jay.example.db.DataSQLiteHelper;
+
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,8 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jay.example.db.DataSQLiteHelper;
-
 public class CustomMade extends Fragment implements OnClickListener {
 	private TextView add;
 	private LinearLayout datas;
@@ -34,9 +34,9 @@ public class CustomMade extends Fragment implements OnClickListener {
 	private Button change;
 	private Button save;
 	DataSQLiteHelper dh;
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.custommade, container, false);
 		mActivity = (MainActivity) this.getActivity();
 		textList.clear();
@@ -54,6 +54,7 @@ public class CustomMade extends Fragment implements OnClickListener {
 		save.setOnClickListener(this);
 		return view;
 	}
+
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
@@ -61,90 +62,94 @@ public class CustomMade extends Fragment implements OnClickListener {
 		datas.removeAllViews();
 		super.onResume();
 	}
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		int id = v.getId();
 		switch (id) {
-			case R.id.add:
-				addView();
-				break;
-			case R.id.next1:
-				if (next.getText().toString().equals("下一步")) {
-					next.setText("写入");
-					for(int i=0;i<textList.size();i++){
-						textList.get(i).setEnabled(false);
-					}
-					change.setVisibility(View.VISIBLE);
-					save.setVisibility(View.VISIBLE);
-				} else {
-					Intent in = new Intent();
-					in.setClass(mActivity, Write2Nfc.class);
-					in.putExtra("content", save());
-					mActivity.startActivity(in);
+		case R.id.add:
+			addView();
+			break;
+		case R.id.next1:
+			if (next.getText().toString().equals("下一步")) {
+				next.setText("写入");
+				for (int i = 0; i < textList.size(); i++) {
+					textList.get(i).setEnabled(false);
 				}
-				break;
-			case R.id.change1:
-				change();
-				break;
-			case R.id.save:
-				save();
-				break;
+				change.setVisibility(View.VISIBLE);
+				save.setVisibility(View.VISIBLE);
+			} else {
+				Intent in = new Intent();
+				in.setClass(mActivity, Write2Nfc.class);
+				in.putExtra("content", save());
+				mActivity.startActivity(in);
+			}
+			break;
+		case R.id.change1:
+			change();
+			break;
+		case R.id.save:
+			save();
+			break;
 		}
-		if(v.getTag()!=null){
-			
+		if (v.getTag() != null) {
+
 		}
 	}
-	public String save(){
+
+	public String save() {
 		StringBuilder sb = new StringBuilder();
-		for(int i=0;i<textList.size();i++){
-			sb.append(textList.get(i++).getText().toString()+":");
-			sb.append(textList.get(i).getText().toString()+"#");
+		for (int i = 0; i < textList.size(); i++) {
+			sb.append(textList.get(i++).getText().toString() + ":");
+			sb.append(textList.get(i).getText().toString() + "#");
 		}
 		String content = sb.toString().trim();
 		String date = GetNowDate();
 		SQLiteDatabase db = dh.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		cv.put("type", "定制");
-		cv.put("atrrs",content);
-		cv.put("num", textList.size()/2);
-		cv.put("time",GetNowDate());
-		if(db.insert("DATA", null, cv)==-1){
-			Toast.makeText(mActivity, "插入失败", Toast.LENGTH_SHORT).show();
-		}
-		else{
-			Toast.makeText(mActivity, "插入成功", Toast.LENGTH_SHORT).show();
+		cv.put("atrrs", content);
+		cv.put("num", textList.size() / 2);
+		cv.put("time", GetNowDate());
+		if (db.insert("DATA", null, cv) == -1) {
+			Toast.makeText(mActivity, "保存失败", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(mActivity, "保存成功", Toast.LENGTH_SHORT).show();
 		}
 		return content;
 	}
-	public void change(){
+
+	public void change() {
 		change.setVisibility(View.INVISIBLE);
 		save.setVisibility(View.INVISIBLE);
-		for(int i=0;i<textList.size();i++){
+		for (int i = 0; i < textList.size(); i++) {
 			textList.get(i).setEnabled(true);
 		}
 		next.setText("下一步");
 	}
-	public void addView(){
+
+	public void addView() {
 		LinearLayout data = new LinearLayout(mActivity);
 		data.setOrientation(LinearLayout.HORIZONTAL);
 		EditText name = new EditText(mActivity);
-		name.setWidth(mWidth/3);
+		name.setWidth(mWidth / 3);
 		name.setTag(++count);
 		textList.add(name);
 		EditText content = new EditText(mActivity);
-		content.setWidth(mWidth/3*2);
+		content.setWidth(mWidth / 3 * 2);
 		content.setTag(++count);
 		textList.add(content);
 		data.addView(name);
 		data.addView(content);
 		datas.addView(data);
 	}
-	public String GetNowDate(){   
-	    String temp_str="";   
-	    Date dt = new Date();   
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
-	    temp_str=sdf.format(dt);   
-	    return temp_str;   
-	}  
+
+	public String GetNowDate() {
+		String temp_str = "";
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		temp_str = sdf.format(dt);
+		return temp_str;
+	}
 }

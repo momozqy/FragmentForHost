@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/app_title"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_bg" >
+
+    <TextView
+        android:id="@+id/biaot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="NFC-RW"
+        android:textColor="@android:color/white"
+        android:textSize="25sp" />
+</RelativeLayout>
