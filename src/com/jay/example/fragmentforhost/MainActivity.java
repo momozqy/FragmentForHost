@@ -32,6 +32,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	public Fragment4 fg4;
 	public Animal fg5;
 	public CustomMade fg6;
+	public HistoryLog log;
 	public NfcAdapter nfcAdapter;
 	private FrameLayout flayout;
 	public String readResult = "";
@@ -208,6 +209,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		}
 		if (fg6 != null) {
 			transaction.hide(fg6);
+		}
+		if (log!= null) {
+			transaction.hide(log);
 		}
 	}
 

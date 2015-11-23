@@ -2,6 +2,8 @@ package com.jay.example.fragmentforhost;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,8 @@ public class Fragment3 extends Fragment {
 	ListView list;
 	TextView biaot;
 	MainActivity mActivity;
-
+	FragmentManager fm;
+	FragmentTransaction ft;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fg3, container, false);
@@ -24,6 +27,7 @@ public class Fragment3 extends Fragment {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1,
 				new String[] { "我的定制", "历史记录" });
 		biaot = (TextView) view.findViewById(R.id.biaot);
+		fm = mActivity.getSupportFragmentManager();
 		biaot.setText("NFC-RW");
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -31,8 +35,20 @@ public class Fragment3 extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
+				ft =  fm.beginTransaction();
 				if (position == 1) {
-					mActivity.getFragmentManager();
+					if(mActivity.log==null){
+						mActivity.log =  new HistoryLog();
+						ft.add(R.id.content, mActivity.log);
+					}
+					else{
+						ft.remove(mActivity.log);
+						mActivity.log =  new HistoryLog();
+						ft.add(R.id.content, mActivity.log);
+					}
+					ft.hide(mActivity.fg3);
+					ft.show(mActivity.log);
+					ft.commit();
 				}
 			}
 		});

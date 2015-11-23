@@ -3,29 +3,28 @@ package com.jay.example.fragmentforhost;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jay.example.db.DataSQLiteHelper;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.jay.example.adapter.MadeListViewAdapter;
+import com.jay.example.db.DataSQLiteHelper;
 
 public class HistoryLog extends Fragment {
 	ListView historyList;
 	List<List<String>> list;
 	MainActivity mActivity;
 	DataSQLiteHelper dh;
-	String Test;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.history, container, false);
 		mActivity = (MainActivity) this.getActivity();
 		dh = mActivity.getDataSQLiteHelper();
@@ -34,19 +33,29 @@ public class HistoryLog extends Fragment {
 		SQLiteDatabase db = dh.getReadableDatabase();
 		Cursor cs = db.rawQuery("select * from DATA", null);
 		while (cs.moveToNext()) {
-			String attrs = cs.getString(cs.getColumnIndex("attrs"));
-			Test = attrs;
+			String attrs = cs.getString(cs.getColumnIndex("atrrs"));
+			String date = cs.getString(cs.getColumnIndex("time"));
+			String strs[] = attrs.split("#");
+			List<String> liststr = new ArrayList<String>();
+			for(int i=0;i<strs.length;i++){
+				liststr.add(strs[i]);
+			}
+			liststr.add(date);
+			list.add(liststr);
 		}
-		cs.close();
-		db.close();
-		historyList.setOnClickListener(new OnClickListener() {
+		MadeListViewAdapter adapter = new MadeListViewAdapter(this.getActivity(), list);
+		historyList.setAdapter(adapter);
+		historyList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(mActivity, Test, Toast.LENGTH_SHORT).show();
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				int id = position+1 ;
+				
 			}
 		});
+		cs.close();
+		db.close();
 		return view;
 	}
 }
