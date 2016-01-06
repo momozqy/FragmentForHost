@@ -16,11 +16,14 @@ import android.widget.GridView;
 public class Fragment1 extends Fragment {
 	MainActivity activity;
 	private GridView gridView;
-	private int[] images = { R.drawable.anim, R.drawable.apparel,
-			R.drawable.auto, R.drawable.beauty, R.drawable.electrical,
-			R.drawable.food, R.drawable.forestry, R.drawable.house,
-			R.drawable.jewelry, R.drawable.sports, R.drawable.custommade,
-			R.drawable.nocustommade };
+	private int[] images = { R.drawable.anim, R.drawable.plant,
+		    R.drawable.soil,R.drawable.custommade,R.drawable.nocustommade 
+		    ,R.drawable.more,R.drawable.none7,R.drawable.none8,R.drawable.none9,R.drawable.none10,R.drawable.none11,R.drawable.none12};
+	private String[] texts = {"野生动物", "林中和林下植物",
+			 "土壤微生物", "非定制", "定制" ,
+			 "敬请期待","","","","","",""
+			 };
+//	private List<String>
 	FragmentManager fManager;
 	FragmentTransaction ft;
 
@@ -35,8 +38,7 @@ public class Fragment1 extends Fragment {
 		Display display = windowManager.getDefaultDisplay();
 		@SuppressWarnings("deprecation")
 		int wh = display.getWidth();
-		GridItemAdapter adapter = new GridItemAdapter(images,
-				this.getActivity(), wh);
+		GridItemAdapter adapter = new GridItemAdapter(images,texts,this.getActivity(), wh);
 		gridView.setAdapter(adapter);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -46,7 +48,7 @@ public class Fragment1 extends Fragment {
 				switch(position){
 					case 0:
 						if(activity.fg5==null){
-							activity.fg5 = new Animal();
+							activity.fg5 = new Wild_animal();
 							ft.add(R.id.content, activity.fg5);
 						}
 						ft.hide(activity.fg1);
@@ -54,24 +56,27 @@ public class Fragment1 extends Fragment {
 						ft.commit();
 						break;
 					case 1:
+						if(activity.plant==null){
+							activity.plant = new Plant_resources();
+							ft.add(R.id.content, activity.plant);
+						}
+						ft.hide(activity.plant);
+						ft.show(activity.plant);
+						ft.commit();
 						break;
 					case 2:
+						if(activity.soil==null){
+							activity.soil = new Soil_microbe();
+							ft.add(R.id.content, activity.soil);
+						}
+						ft.hide(activity.soil);
+						ft.show(activity.soil);
+						ft.commit();
 						break;
 					case 3:
+						
 						break;
 					case 4:
-						break;
-					case 5:
-						break;
-					case 6:
-						break;
-					case 7:
-						break;
-					case 8:
-						break;
-					case 9:
-						break;
-					case 10:
 						if(activity.fg6==null){
 							activity.fg6 = new CustomMade();
 							ft.add(R.id.content, activity.fg6);
@@ -86,6 +91,18 @@ public class Fragment1 extends Fragment {
 						ft.show(activity.fg6);
 						ft.commit();
 						break;
+					case 5:
+						break;
+					case 6:
+						break;
+					case 7:
+						break;
+					case 8:
+						break;
+					case 9:
+						break;
+					case 10:
+					   break;
 					case 11:
 						break;
 					default:

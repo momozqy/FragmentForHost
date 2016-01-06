@@ -34,13 +34,14 @@
                     android:layout_gravity="center_horizontal"  
                     android:src="@drawable/ic_tabbar_course_normal" />  
   
-                <TextView  
-                    android:id="@+id/course_text"  
-                    android:layout_width="wrap_content"  
-                    android:layout_height="wrap_content"  
-                    android:layout_gravity="center_horizontal"  
-                    android:text="日程"  
-                    android:textColor="#7597B3" />  
+                <TextView
+                    android:id="@+id/course_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="读取"
+                    android:textColor="#000000" />
+  
             </LinearLayout>  
         </RelativeLayout>  
         
@@ -68,8 +69,8 @@
                     android:layout_width="wrap_content"  
                     android:layout_height="wrap_content"  
                     android:layout_gravity="center_horizontal"  
-                    android:text="发现"  
-                    android:textColor="#7597B3" />  
+                    android:text="写入"  
+                    android:textColor="#000000"/>  
             </LinearLayout>  
         </RelativeLayout>  
         
@@ -98,8 +99,8 @@
                     android:layout_width="wrap_content"  
                     android:layout_height="wrap_content"  
                     android:layout_gravity="center_horizontal"  
-                    android:text="设置"  
-                    android:textColor="#7597B3" />  
+                    android:text="我的"  
+                    android:textColor="#000000" />  
             </LinearLayout>  
         </RelativeLayout>  
                 

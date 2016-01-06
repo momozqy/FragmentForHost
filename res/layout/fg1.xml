@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@android:color/black"
+    android:background="@android:color/darker_gray"
     android:orientation="vertical" >
+     <include  android:id="@id/app_title" layout="@layout/app_title"/>
     
     <GridView 
         android:id="@+id/gridVew"

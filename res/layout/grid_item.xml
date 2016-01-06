@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <ImageView
+    android:background="@android:color/white" >    
+    
+    <RelativeLayout 
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_gravity="center"
+       android:gravity="center">
+       
+            <ImageView
         android:id="@+id/image"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal" >
-    </ImageView>
-<!-- 
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/anim" />
+
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:gravity="left"
-        android:textSize="16dip" >
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="野生动物"        
+        android:textSize="12dip" >
     </TextView>
+    <!-- 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
@@ -28,5 +39,11 @@
         android:textColor="#938192"
         android:textSize="13dip" >
     </TextView> -->
+
+
+        
+    </RelativeLayout>
+
+   
 
 </LinearLayout>
