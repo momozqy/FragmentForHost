@@ -24,19 +24,16 @@ public class MadeListViewAdapter extends BaseAdapter {
 		inflater = LayoutInflater.from(mContext);
 	}
 
-	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return datas.size();
 	}
 
-	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
 		return datas.get(position);
 	}
 
-	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
@@ -47,14 +44,14 @@ public class MadeListViewAdapter extends BaseAdapter {
 		public TextView date;
 	}
 
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		Data item = null;
 		if (convertView == null) {
 			item = new Data();
 			convertView = inflater.inflate(R.layout.list_item, null);
-			item.datas = (LinearLayout) convertView.findViewById(R.id.list_datas);
+			item.datas = (LinearLayout) convertView
+					.findViewById(R.id.list_datas);
 			item.date = (TextView) convertView.findViewById(R.id.date);
 			convertView.setTag(item);
 		} else {
@@ -66,7 +63,9 @@ public class MadeListViewAdapter extends BaseAdapter {
 		item.datas.removeAllViews();
 		for (i = 0; i < list.size() - 1; i++) {
 			TextView view = new TextView(mContext);
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					android.widget.LinearLayout.LayoutParams.WRAP_CONTENT,
+					android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
 			view.setLayoutParams(lp);
 			view.setTextSize(15);
 			view.setText(list.get(i));

@@ -23,8 +23,8 @@ public class HistoryLog extends Fragment {
 	MainActivity mActivity;
 	DataSQLiteHelper dh;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.history, container, false);
 		mActivity = (MainActivity) this.getActivity();
 		dh = mActivity.getDataSQLiteHelper();
@@ -37,21 +37,21 @@ public class HistoryLog extends Fragment {
 			String date = cs.getString(cs.getColumnIndex("time"));
 			String strs[] = attrs.split("#");
 			List<String> liststr = new ArrayList<String>();
-			for(int i=0;i<strs.length;i++){
+			for (int i = 0; i < strs.length; i++) {
 				liststr.add(strs[i]);
 			}
 			liststr.add(date);
 			list.add(liststr);
 		}
-		MadeListViewAdapter adapter = new MadeListViewAdapter(this.getActivity(), list);
+		MadeListViewAdapter adapter = new MadeListViewAdapter(
+				this.getActivity(), list);
 		historyList.setAdapter(adapter);
 		historyList.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				int id = position+1 ;
-				
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				int id = position + 1;
+
 			}
 		});
 		cs.close();

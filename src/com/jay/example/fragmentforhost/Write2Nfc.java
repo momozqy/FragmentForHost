@@ -2,8 +2,6 @@ package com.jay.example.fragmentforhost;
 
 import java.io.IOException;
 
-import com.jay.example.db.DataSQLiteHelper;
-
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.ContentValues;
@@ -24,6 +22,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.jay.example.db.DataSQLiteHelper;
+
 public class Write2Nfc extends Activity {
 	String text;
 	ImageView img;
@@ -32,7 +32,7 @@ public class Write2Nfc extends Activity {
 	PendingIntent pendingIntent;
 	String[][] mTechLists;
 	private Boolean ifWrite;
-	
+
 	DataSQLiteHelper dh;
 
 	@Override
@@ -43,8 +43,8 @@ public class Write2Nfc extends Activity {
 		Intent in = getIntent();
 		img = (ImageView) findViewById(R.id.tips);
 		text = in.getStringExtra("content");
-		if(dh==null)
-			dh = new DataSQLiteHelper(Write2Nfc.this,"zqydb");
+		if (dh == null)
+			dh = new DataSQLiteHelper(Write2Nfc.this, "zqydb");
 		init();
 
 	}
@@ -104,20 +104,24 @@ public class Write2Nfc extends Activity {
 					System.out.println("3....");
 					Toast.makeText(getApplicationContext(), text + "数据写入成功!",
 							Toast.LENGTH_SHORT).show();
-					
-					
+
 					SQLiteDatabase db = dh.getWritableDatabase();
 					ContentValues cv = new ContentValues();
-					cv.put("type",String.valueOf(getIntent().getStringExtra("type")));
-					cv.put("atrrs",String.valueOf(getIntent().getStringExtra("atrrs")));
+					cv.put("type",
+							String.valueOf(getIntent().getStringExtra("type")));
+					cv.put("atrrs",
+							String.valueOf(getIntent().getStringExtra("atrrs")));
 					cv.put("num", getIntent().getIntExtra("num", 6));
-					cv.put("time",String.valueOf(getIntent().getStringExtra("time")));
-					
-					if(db.insert("DATA", null, cv)==-1){
-						Toast.makeText(Write2Nfc.this, "插入失败", Toast.LENGTH_SHORT).show();
-					}
-					else{
-						Toast.makeText(Write2Nfc.this, "插入成功", Toast.LENGTH_SHORT).show();
+					cv.put("time",
+							String.valueOf(getIntent().getStringExtra("time")));
+
+					if (db.insert("DATA", null, cv) == -1) {
+						Toast.makeText(Write2Nfc.this, "插入失败",
+								Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(Write2Nfc.this, "插入成功",
+								Toast.LENGTH_SHORT).show();
+						this.finish();
 					}
 					displayControl(false);
 				} catch (IOException e1) {

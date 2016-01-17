@@ -15,6 +15,7 @@ import android.nfc.tech.NfcB;
 import android.nfc.tech.NfcF;
 import android.nfc.tech.NfcV;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -31,17 +32,28 @@ import android.widget.Toast;
 import com.jay.example.db.DataSQLiteHelper;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
-	
-	public DataSQLiteHelper dh ;
+
+	public DataSQLiteHelper dh;
+	// 第一个界面 主要功能展示界面
 	public Fragment1 fg1;
+	// 第二个界面 读出数据 展示界面
 	public Fragment2 fg2;
+	// 第三个界面 我的定制 和 历史记录
 	public Fragment3 fg3;
+	// 写入测试界面
 	public Fragment4 fg4;
+	// 野生动物 写入界面
 	public Wild_animal fg5;
+	// 植物写入界面
 	public Plant_resources plant;
+	// 土壤生物 写入界面
 	public Soil_microbe soil;
+	// 我的定制 写入界面
 	public CustomMade fg6;
+	// 历史记录界面
 	public HistoryLog log;
+	// handler
+	Handler mHandler;
 	public NfcAdapter nfcAdapter;
 	private FrameLayout flayout;
 	public String readResult = "";
@@ -51,7 +63,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	private ImageView course_image;
 	private ImageView found_image;
 	private ImageView settings_image;
-	private TextView course_text; 
+	private TextView course_text;
 	private TextView settings_text;
 	private TextView found_text;
 	private boolean isFirst = true;
@@ -59,23 +71,24 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	private PendingIntent pendingIntent;
 	private IntentFilter[] mFilters;
 	private String[][] mTechLists;
-	
-    //定义要使用的颜色值
-//	private int whirt = 0xf;
-//	private int gray = 0x01010101;
-//	private int blue = 0x00000000;
-	
-	private String gray="#cccccc";
-	private String blue="#000000";
-	
-	//定义FragmentManager对象
+
+	// 定义要使用的颜色值
+	// private int whirt = 0xf;
+	// private int gray = 0x01010101;
+	// private int blue = 0x00000000;
+
+	private String gray = "#cccccc";
+	private String blue = "#000000";
+
+	// 定义FragmentManager对象
 	FragmentManager fManager;
-	public DataSQLiteHelper getDataSQLiteHelper(){
-		if(dh==null)
-			dh = new DataSQLiteHelper(MainActivity.this,"zqydb");
-			return dh;
+
+	public DataSQLiteHelper getDataSQLiteHelper() {
+		if (dh == null)
+			dh = new DataSQLiteHelper(MainActivity.this, "zqydb");
+		return dh;
 	}
-	@Override
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -83,7 +96,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		fManager = getSupportFragmentManager();
 		initViews();
 	}
-    //完成组件的初始化
+
+	// 完成组件的初始化
 	public void initViews() {
 		course_image = (ImageView) findViewById(R.id.course_image);
 		found_image = (ImageView) findViewById(R.id.found_image);
@@ -101,9 +115,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		if (!ifNFCUse()) {
 			System.out.println("is not use");
-		} // 将被调用的Intent，用于重复被Intent触发后将要执行的跳转 
-		pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass())
-				.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
+		} // 将被调用的Intent，用于重复被Intent触发后将要执行的跳转
+		pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
+				getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
 		System.out.println("pengdinng Intent");
 		// * 设定要过滤的标签动作，这里只接收ACTION_NDEF_DISCOVERED类型
 		ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
@@ -122,19 +136,37 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 				System.out.println(getIntent().getAction());
 				if (readFromTag(getIntent())) { // ifo_NFC.setText(readResult);
 					System.out.println("1.5...");
-				} else { 
-					Toast.makeText(this, readResult, Toast.LENGTH_SHORT).show();
+				} else {
+					setChioceItem(0);
+					popReadFragment();
+					setChioceItem(1);
 				}
 			}
 			isFirst = false;
 		}
 		System.out.println("onCreate...");
-		
+
 		setChioceItem(0);
 
 	}
-    //重写onClick事件
-	@Override
+
+	private void popReadFragment() {
+		FragmentTransaction transaction = fManager.beginTransaction();
+		clearChioce();
+		hideFragments(transaction);
+		found_image.setImageResource(R.drawable.ic_tabbar_found_pressed);
+		found_text.setTextColor(Color.parseColor(blue));
+		found_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
+		if (fg2 != null)
+			transaction.remove(fg2);
+		fg2 = new Fragment2(readResult.split("#"));
+		transaction.add(R.id.content, fg2);
+		transaction.show(fg2);
+		transaction.commit();
+	}
+
+	// 重写onClick事件
+
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.course_layout:
@@ -151,9 +183,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		}
 
 	}
-	//定义一个选中一个item后的处理
+
+	// 定义一个选中一个item后的处理
 	public void setChioceItem(int index) {
-		//重置选项+隐藏所有Fragment
+		// 重置选项+隐藏所有Fragment
 		FragmentTransaction transaction = fManager.beginTransaction();
 		clearChioce();
 		hideFragments(transaction);
@@ -167,7 +200,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 				fg1 = new Fragment1();
 				transaction.add(R.id.content, fg1);
 			} else {
-				 // 如果MessageFragment不为空，则直接将它显示出来
+				// 如果MessageFragment不为空，则直接将它显示出来
 				transaction.show(fg1);
 			}
 			break;
@@ -175,13 +208,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			found_image.setImageResource(R.drawable.ic_tabbar_found_pressed);
 			found_text.setTextColor(Color.parseColor(blue));
 			found_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
-			
-			if (fg2 == null) {
-				fg2 = new Fragment2();
-				transaction.add(R.id.content, fg2);
-			} else {
-				transaction.show(fg2);
-			}
+			transaction.show(fg2);
 			break;
 
 		case 2:
@@ -201,13 +228,14 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		removeOthers(transaction);
 		transaction.commit();
 	}
-	//隐藏所有的Fragment,避免fragment混乱
+
+	// 隐藏所有的Fragment,避免fragment混乱
 	private void removeOthers(FragmentTransaction ft) {
 
 		if (fg4 != null)
 			ft.remove(fg4);
-		//if (fg5 != null)
-		//	ft.remove(fg5);
+		// if (fg5 != null)
+		// ft.remove(fg5);
 	}
 
 	private void hideFragments(FragmentTransaction transaction) {
@@ -230,13 +258,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		if (fg6 != null) {
 			transaction.hide(fg6);
 		}
-		if (log!= null) {
+		if (log != null) {
 			transaction.hide(log);
 		}
-		if (plant!= null) {
+		if (plant != null) {
 			transaction.hide(plant);
 		}
-		if (soil!= null) {
+		if (soil != null) {
 			transaction.hide(soil);
 		}
 	}
@@ -297,24 +325,24 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		}
 		return false;
 	}
-	@Override
+
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-//		 前台分发系统,这里的作用在于第二次检测NFC标签时该应用有最高的捕获优先权.
-				nfcAdapter.enableForegroundDispatch(this, pendingIntent, mFilters,
-						mTechLists);
+		// 前台分发系统,这里的作用在于第二次检测NFC标签时该应用有最高的捕获优先权.
+		nfcAdapter.enableForegroundDispatch(this, pendingIntent, mFilters,
+				mTechLists);
 
-				System.out.println("onResume...");
+		System.out.println("onResume...");
 	}
-	@Override
+
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-//		nfcAdapter.disableForegroundDispatch(this);
+		// nfcAdapter.disableForegroundDispatch(this);
 		System.out.println("onPause...");
 	}
-	@Override
+
 	protected void onNewIntent(Intent intent) {
 		// TODO Auto-generated method stub
 		super.onNewIntent(intent);
@@ -324,7 +352,14 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 				|| NfcAdapter.ACTION_TECH_DISCOVERED.equals(intent.getAction())) {
 			System.out.println("onNewIntent2...");
 			if (readFromTag(intent)) {
-				Toast.makeText(this, readResult, Toast.LENGTH_SHORT).show();
+				setChioceItem(0);
+				popReadFragment();
+				/*
+				 * if (mHandler != null) { Message msg =
+				 * mHandler.obtainMessage(); msg.what = 1;
+				 * msg.getData().putStringArray("args", readResult.split("#"));
+				 * mHandler.sendMessage(msg); } setChioceItem(1);
+				 */
 			} else {
 				Toast.makeText(this, "标签为空", Toast.LENGTH_SHORT).show();
 			}
@@ -332,4 +367,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	}
 
+	public void setHanlder(Handler handler) {
+		mHandler = handler;
+	}
 }

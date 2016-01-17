@@ -3,7 +3,6 @@ package com.jay.example.fragmentforhost;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.jay.example.db.DataSQLiteHelper;
 
@@ -33,7 +31,6 @@ public class Wild_animal extends Fragment {
 	private LinearLayout ll;
 	private StringBuilder sb;
 
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fg5, container, false);
@@ -49,8 +46,7 @@ public class Wild_animal extends Fragment {
 		dh = activity.getDataSQLiteHelper();
 		sb = new StringBuilder();
 		next.setOnClickListener(new OnClickListener() {
-			
-			@Override
+
 			public void onClick(View v) {
 				if (next.getText().toString().equals("下一步")) {
 					next.setText("写入");
@@ -64,53 +60,53 @@ public class Wild_animal extends Fragment {
 					Intent in = new Intent();
 					in.setClass(activity, Write2Nfc.class);
 					String str = name.getText().toString().trim();
-					if(!str.equals(""))
-					{
-						sb.append("中文名："+str);
+					if (!str.equals("")) {
+						sb.append("中文名:" + str + "#");
 					}
 					str = ename.getText().toString().trim();
-					if(!str.equals(""))
-						sb.append("英文名："+str);
+					if (!str.equals(""))
+						sb.append("英文名:" + str + "#");
 					str = latin.getText().toString().trim();
-					if(!str.equals(""))
-						sb.append("拉丁名:"+str);
+					if (!str.equals(""))
+						sb.append("拉丁名:" + str + "#");
 					str = dis.getText().toString().trim();
-					if(!str.equals("")){
-						sb.append("分     布:"+str);
+					if (!str.equals("")) {
+						sb.append("分     布:" + str + "#");
 					}
 					str = feature.getText().toString();
-					if(!str.equals("")){
-						sb.append("习    性:"+str);
+					if (!str.equals("")) {
+						sb.append("习    性:" + str);
 					}
 					String content = sb.toString().trim();
-					
+
 					in.putExtra("content", content);
 					in.putExtra("type", "动物");
 					in.putExtra("atrrs", content);
 					in.putExtra("num", 5);
 					in.putExtra("time", GetNowDate());
-					
+
 					String date = GetNowDate();
 					SQLiteDatabase db = dh.getWritableDatabase();
-//					ContentValues cv = new ContentValues();
-//					cv.put("type", "动物");
-//					cv.put("atrrs",content);
-//					cv.put("num", 5);
-//					cv.put("time",GetNowDate());
-					
-//					if(db.insert("DATA", null, cv)==-1){
-//						Toast.makeText(activity, "插入失败", Toast.LENGTH_SHORT).show();
-//					}
-//					else{
-//						Toast.makeText(activity, "插入成功", Toast.LENGTH_SHORT).show();
-//					}
+					// ContentValues cv = new ContentValues();
+					// cv.put("type", "动物");
+					// cv.put("atrrs",content);
+					// cv.put("num", 5);
+					// cv.put("time",GetNowDate());
+
+					// if(db.insert("DATA", null, cv)==-1){
+					// Toast.makeText(activity, "插入失败",
+					// Toast.LENGTH_SHORT).show();
+					// }
+					// else{
+					// Toast.makeText(activity, "插入成功",
+					// Toast.LENGTH_SHORT).show();
+					// }
 					activity.startActivity(in);
 				}
 			}
 		});
 		change.setOnClickListener(new OnClickListener() {
-			
-			@Override
+
 			public void onClick(View v) {
 				change.setVisibility(View.INVISIBLE);
 				next.setText("下一步");
@@ -124,17 +120,16 @@ public class Wild_animal extends Fragment {
 		return view;
 	}
 
-	@Override
 	public void onDetach() {
 		// TODO Auto-generated method stub
 		super.onDetach();
 	}
-	
-	public String GetNowDate(){   
-	    String temp_str="";   
-	    Date dt = new Date();   
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");   
-	    temp_str=sdf.format(dt);   
-	    return temp_str;   
-	}  
+
+	public String GetNowDate() {
+		String temp_str = "";
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		temp_str = sdf.format(dt);
+		return temp_str;
+	}
 }

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.jay.example.db.DataSQLiteHelper;
-
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jay.example.db.DataSQLiteHelper;
+
 public class CustomMade extends Fragment implements OnClickListener {
 	private TextView add;
 	private LinearLayout datas;
@@ -35,8 +35,8 @@ public class CustomMade extends Fragment implements OnClickListener {
 	private Button save;
 	DataSQLiteHelper dh;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.custommade, container, false);
 		mActivity = (MainActivity) this.getActivity();
 		textList.clear();
@@ -55,7 +55,6 @@ public class CustomMade extends Fragment implements OnClickListener {
 		return view;
 	}
 
-	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		count = 1;
@@ -63,7 +62,6 @@ public class CustomMade extends Fragment implements OnClickListener {
 		super.onResume();
 	}
 
-	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		int id = v.getId();
@@ -102,7 +100,10 @@ public class CustomMade extends Fragment implements OnClickListener {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < textList.size(); i++) {
 			sb.append(textList.get(i++).getText().toString() + ":");
-			sb.append(textList.get(i).getText().toString() + "#");
+			if (i != textList.size() - 1)
+				sb.append(textList.get(i).getText().toString() + "#");
+			else
+				sb.append(textList.get(i).getText().toString());
 		}
 		String content = sb.toString().trim();
 		String date = GetNowDate();

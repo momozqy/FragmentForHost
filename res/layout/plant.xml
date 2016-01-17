@@ -42,7 +42,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="中文名："
+		    android:text="中文名:"
 		    android:background="@null"
 		    />
 		<EditText 
@@ -65,7 +65,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="别名："
+		    android:text="别名:"
 		    android:background="@null"
 		    />
 		<EditText 
@@ -88,7 +88,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="拉丁名："
+		    android:text="拉丁名:"
 		    android:background="@null"
 		    />
 		<EditText 
@@ -111,7 +111,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="科名："
+		    android:text="科名:"
 		    android:background="@null"
 		    />
 		<EditText 
@@ -134,7 +134,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="属名："
+		    android:text="属名:"
 		    android:background="@null"
 		    />
 		<EditText 
@@ -158,7 +158,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="习性："
+		    android:text="习性:"
 		    android:background="@null"
 		    />
 		<EditText 

@@ -24,7 +24,6 @@ public class Fragment4 extends Fragment {
 	FragmentManager fManager;
 	FragmentTransaction ft;
 
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fg4, container, false);
@@ -36,7 +35,6 @@ public class Fragment4 extends Fragment {
 		fManager = activity.getSupportFragmentManager();
 		next.setOnClickListener(new OnClickListener() {
 
-			@Override
 			public void onClick(View v) {
 				if (input.getText().toString().trim().equals("")) {
 					Toast.makeText(activity, "请输入文本！", Toast.LENGTH_SHORT);
@@ -44,7 +42,7 @@ public class Fragment4 extends Fragment {
 					if (next.getText().toString().equals("下一步")) {
 						next.setText("写入");
 						change.setVisibility(View.VISIBLE);
-						label.setHint("文本数据内容：");
+						label.setHint("文本数据内容:");
 						input.setEnabled(false);
 					} else {
 						// 跳转
@@ -66,7 +64,6 @@ public class Fragment4 extends Fragment {
 		});
 		change.setOnClickListener(new OnClickListener() {
 
-			@Override
 			public void onClick(View v) {
 				change.setVisibility(View.INVISIBLE);
 				input.setEnabled(true);
@@ -77,7 +74,6 @@ public class Fragment4 extends Fragment {
 		return view;
 	}
 
-	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();

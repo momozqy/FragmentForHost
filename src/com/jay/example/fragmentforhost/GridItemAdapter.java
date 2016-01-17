@@ -21,16 +21,17 @@ public class GridItemAdapter extends BaseAdapter {
 
 	static class ViewHolder {
 		public ImageView image;
-		 public TextView title;
+		public TextView title;
 		// public TextView time;
 	}
 
-	public GridItemAdapter(int[] images,String[] texts, Context context, int width) {
+	public GridItemAdapter(int[] images, String[] texts, Context context,
+			int width) {
 		super();
 		float f = context.getResources().getDisplayMetrics().density;
 		pix = (int) (((float) width - f * 4) / 3.0 + 0.5f);
 		gridItemList = new ArrayList<GridItem>();
-		textList=new ArrayList<String>();
+		textList = new ArrayList<String>();
 		inflater = LayoutInflater.from(context);
 		for (int i = 0; i < images.length; i++) {
 			GridItem picture = new GridItem(images[i]);
@@ -41,7 +42,6 @@ public class GridItemAdapter extends BaseAdapter {
 		}
 	}
 
-	@Override
 	public int getCount() {
 		if (null != gridItemList) {
 			return gridItemList.size();
@@ -50,17 +50,14 @@ public class GridItemAdapter extends BaseAdapter {
 		}
 	}
 
-	@Override
 	public Object getItem(int position) {
 		return gridItemList.get(position);
 	}
 
-	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder;
 		if (convertView == null) {
@@ -69,8 +66,7 @@ public class GridItemAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.grid_item, null);
 			convertView.setLayoutParams(params);
 			viewHolder = new ViewHolder();
-			 viewHolder.title = (TextView)
-			 convertView.findViewById(R.id.title);
+			viewHolder.title = (TextView) convertView.findViewById(R.id.title);
 			viewHolder.image = (ImageView) convertView.findViewById(R.id.image);
 			// viewHolder.time = (TextView) convertView
 			// .findViewById(R.id.description);
@@ -78,7 +74,7 @@ public class GridItemAdapter extends BaseAdapter {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		 viewHolder.title.setText(textList.get(position));
+		viewHolder.title.setText(textList.get(position));
 		// viewHolder.time.setText(gridItemList.get(position).getTime());
 		viewHolder.image.setImageResource(gridItemList.get(position)
 				.getImageId());
