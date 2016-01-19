@@ -51,7 +51,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	// 我的定制 写入界面
 	public CustomMade fg6;
 	// 历史记录界面
-	public HistoryLog log;
+	public MyMade log;
 	// handler
 	Handler mHandler;
 	public NfcAdapter nfcAdapter;

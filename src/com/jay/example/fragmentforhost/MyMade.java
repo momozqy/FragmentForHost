@@ -17,7 +17,7 @@ import android.widget.ListView;
 import com.jay.example.adapter.MadeListViewAdapter;
 import com.jay.example.db.DataSQLiteHelper;
 
-public class HistoryLog extends Fragment {
+public class MyMade extends Fragment {
 	ListView historyList;
 	List<List<String>> list;
 	MainActivity mActivity;
@@ -25,7 +25,7 @@ public class HistoryLog extends Fragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.history, container, false);
+		View view = inflater.inflate(R.layout.mymade, container, false);
 		mActivity = (MainActivity) this.getActivity();
 		dh = mActivity.getDataSQLiteHelper();
 		historyList = (ListView) view.findViewById(R.id.historyList);

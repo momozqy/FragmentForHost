@@ -35,8 +35,7 @@ public class CustomMade extends Fragment implements OnClickListener {
 	private Button save;
 	DataSQLiteHelper dh;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.custommade, container, false);
 		mActivity = (MainActivity) this.getActivity();
 		textList.clear();
@@ -99,6 +98,11 @@ public class CustomMade extends Fragment implements OnClickListener {
 	public String save() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < textList.size(); i++) {
+			// 如果名字是空的 不存入
+			if (textList.get(i).getText().toString().trim().equals("")) {
+				i++;
+				continue;
+			}
 			sb.append(textList.get(i++).getText().toString() + ":");
 			if (i != textList.size() - 1)
 				sb.append(textList.get(i).getText().toString() + "#");
@@ -110,7 +114,7 @@ public class CustomMade extends Fragment implements OnClickListener {
 		SQLiteDatabase db = dh.getWritableDatabase();
 		ContentValues cv = new ContentValues();
 		cv.put("type", "定制");
-		cv.put("atrrs", content);
+		cv.put("content", content);
 		cv.put("num", textList.size() / 2);
 		cv.put("time", GetNowDate());
 		if (db.insert("DATA", null, cv) == -1) {

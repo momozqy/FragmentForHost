@@ -31,8 +31,7 @@ public class Plant_resources extends Fragment {
 	private LinearLayout ll;
 	private StringBuilder sb;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.plant, container, false);
 		content = view;
 		activity = (MainActivity) getActivity();
@@ -85,23 +84,10 @@ public class Plant_resources extends Fragment {
 						sb.append("习     性:" + str);
 					}
 					String content = sb.toString().trim();
+					in.putExtra("type", "植物");
 					in.putExtra("content", content);
-					// String date = GetNowDate();
-					// SQLiteDatabase db = dh.getWritableDatabase();
-					// ContentValues cv = new ContentValues();
-					// cv.put("type", "植物资源");
-					// cv.put("atrrs",content);
-					// cv.put("num", 6);
-					// cv.put("time",GetNowDate());
-					//
-					// if(db.insert("DATA", null, cv)==-1){
-					// Toast.makeText(activity, "插入失败",
-					// Toast.LENGTH_SHORT).show();
-					// }
-					// else{
-					// Toast.makeText(activity, "插入成功",
-					// Toast.LENGTH_SHORT).show();
-					// }
+					in.putExtra("num", 6);
+					in.putExtra("time", GetNowDate());
 					activity.startActivity(in);
 				}
 			}

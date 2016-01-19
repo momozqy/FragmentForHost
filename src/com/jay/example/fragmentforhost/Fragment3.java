@@ -20,13 +20,11 @@ public class Fragment3 extends Fragment {
 	FragmentManager fm;
 	FragmentTransaction ft;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fg3, container, false);
 		list = (ListView) view.findViewById(R.id.mineOrder);
 		mActivity = (MainActivity) this.getActivity();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-				this.getActivity(), android.R.layout.simple_list_item_1,
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1,
 				new String[] { "我的定制", "历史记录" });
 		biaot = (TextView) view.findViewById(R.id.biaot);
 		fm = mActivity.getSupportFragmentManager();
@@ -34,16 +32,15 @@ public class Fragment3 extends Fragment {
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(new OnItemClickListener() {
 
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ft = fm.beginTransaction();
-				if (position == 1) {
+				if (position == 0) {
 					if (mActivity.log == null) {
-						mActivity.log = new HistoryLog();
+						mActivity.log = new MyMade();
 						ft.add(R.id.content, mActivity.log);
 					} else {
 						ft.remove(mActivity.log);
-						mActivity.log = new HistoryLog();
+						mActivity.log = new MyMade();
 						ft.add(R.id.content, mActivity.log);
 					}
 					ft.hide(mActivity.fg3);

@@ -31,16 +31,14 @@ public class Soil_microbe extends Fragment {
 	private LinearLayout ll;
 	private StringBuilder sb;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.soil, container, false);
 		content = view;
 		activity = (MainActivity) getActivity();
 		variety = (EditText) view.findViewById(R.id.varietyc);
 		biomass = (EditText) view.findViewById(R.id.biomassc);
 		microb_activity = (EditText) view.findViewById(R.id.microb_activityc);
-		enzymatic_activity = (EditText) view
-				.findViewById(R.id.enzymatic_activityc);
+		enzymatic_activity = (EditText) view.findViewById(R.id.enzymatic_activityc);
 		change = (Button) view.findViewById(R.id.change);
 		next = (Button) view.findViewById(R.id.next);
 		dh = activity.getDataSQLiteHelper();
@@ -75,22 +73,9 @@ public class Soil_microbe extends Fragment {
 					}
 					String content = sb.toString().trim();
 					in.putExtra("content", content);
-					String date = GetNowDate();
-					SQLiteDatabase db = dh.getWritableDatabase();
-					ContentValues cv = new ContentValues();
-					// cv.put("type", "土壤微生物");
-					// cv.put("atrrs",content);
-					// cv.put("num", 4);
-					// cv.put("time",GetNowDate());
-					//
-					// if(db.insert("DATA", null, cv)==-1){
-					// Toast.makeText(activity, "插入失败",
-					// Toast.LENGTH_SHORT).show();
-					// }
-					// else{
-					// Toast.makeText(activity, "插入成功",
-					// Toast.LENGTH_SHORT).show();
-					// }
+					in.putExtra("type", "植物");
+					in.putExtra("num", 4);
+					in.putExtra("time", GetNowDate());
 					activity.startActivity(in);
 				}
 			}

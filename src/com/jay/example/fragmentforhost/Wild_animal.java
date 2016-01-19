@@ -31,8 +31,7 @@ public class Wild_animal extends Fragment {
 	private LinearLayout ll;
 	private StringBuilder sb;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fg5, container, false);
 		content = view;
 		activity = (MainActivity) getActivity();
@@ -81,26 +80,8 @@ public class Wild_animal extends Fragment {
 
 					in.putExtra("content", content);
 					in.putExtra("type", "动物");
-					in.putExtra("atrrs", content);
 					in.putExtra("num", 5);
 					in.putExtra("time", GetNowDate());
-
-					String date = GetNowDate();
-					SQLiteDatabase db = dh.getWritableDatabase();
-					// ContentValues cv = new ContentValues();
-					// cv.put("type", "动物");
-					// cv.put("atrrs",content);
-					// cv.put("num", 5);
-					// cv.put("time",GetNowDate());
-
-					// if(db.insert("DATA", null, cv)==-1){
-					// Toast.makeText(activity, "插入失败",
-					// Toast.LENGTH_SHORT).show();
-					// }
-					// else{
-					// Toast.makeText(activity, "插入成功",
-					// Toast.LENGTH_SHORT).show();
-					// }
 					activity.startActivity(in);
 				}
 			}
