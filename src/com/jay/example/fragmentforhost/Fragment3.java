@@ -47,6 +47,19 @@ public class Fragment3 extends Fragment {
 					ft.show(mActivity.log);
 					ft.commit();
 				}
+				if (position == 1) {
+					if (mActivity.his == null) {
+						mActivity.his = new HistoryLog();
+						ft.add(R.id.content, mActivity.his);
+					} else {
+						ft.remove(mActivity.log);
+						mActivity.log = new MyMade();
+						ft.add(R.id.content, mActivity.his);
+					}
+					ft.hide(mActivity.fg3);
+					ft.show(mActivity.his);
+					ft.commit();
+				}
 			}
 		});
 		return view;

@@ -4,9 +4,51 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical" >
+    <include layout="@layout/app_title" android:id="@id/app_title"/>
 	<EditText 
 	    android:id="@+id/input"
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
+	    android:lines="10"
+	    android:gravity="left"
+	    android:layout_height="100dp"
+	    android:layout_marginTop="16dp"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginRight="16dp"
+	    android:background="@drawable/edit_bg"
+	    android:hint="please input anything"
 	    />
+	
+    <Button
+        android:id="@+id/next"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:text="下一步" />
+
+    <Button
+        android:id="@+id/change"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/next1"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="修改"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/change1"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="150dp"
+        android:text="保存"
+        android:visibility="invisible" />
 </LinearLayout>

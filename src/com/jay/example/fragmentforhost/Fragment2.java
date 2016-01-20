@@ -20,6 +20,7 @@ public class Fragment2 extends Fragment {
 	String[] args;
 	MainActivity mActivity;
 	int mWidth;
+	String def = "defualt";
 	Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -47,11 +48,9 @@ public class Fragment2 extends Fragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fg2, container, false);
 		mActivity = (MainActivity) this.getActivity();
-		mActivity.setHanlder(handler);
 		WindowManager windowManager = mActivity.getWindowManager();
 		mWidth = windowManager.getDefaultDisplay().getWidth();
 		ll_read = (LinearLayout) view.findViewById(R.id.ll_read);
@@ -82,14 +81,25 @@ public class Fragment2 extends Fragment {
 			LinearLayout data = new LinearLayout(mActivity);
 			data.setOrientation(LinearLayout.HORIZONTAL);
 			TextView name = new TextView(mActivity);
-			name.setWidth(mWidth / 3);
-			name.setText(strs[0]);
-			EditText content = new EditText(mActivity);
-			content.setWidth(mWidth / 3 * 2);
-			content.setText(strs[1]);
-			data.addView(name);
-			data.addView(content);
-			ll_read.addView(data);
+			if (strs.length == 2) {
+				name.setWidth(mWidth / 3);
+				name.setText(strs[0]);
+				EditText content = new EditText(mActivity);
+				content.setWidth(mWidth / 3 * 2);
+				content.setText(strs[1]);
+				data.addView(name);
+				data.addView(content);
+				ll_read.addView(data);
+			} else {
+				name.setWidth(mWidth / 3);
+				name.setText(def);
+				EditText content = new EditText(mActivity);
+				content.setWidth(mWidth / 3 * 2);
+				content.setText(strs[0]);
+				data.addView(name);
+				data.addView(content);
+				ll_read.addView(data);
+			}
 		}
 	}
 }

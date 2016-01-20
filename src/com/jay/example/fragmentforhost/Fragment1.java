@@ -16,19 +16,15 @@ import android.widget.GridView;
 public class Fragment1 extends Fragment {
 	MainActivity activity;
 	private GridView gridView;
-	private int[] images = { R.drawable.anim, R.drawable.plant,
-			R.drawable.soil, R.drawable.custommade, R.drawable.nocustommade,
-			R.drawable.more, R.drawable.none7, R.drawable.none8,
-			R.drawable.none9, R.drawable.none10, R.drawable.none11,
-			R.drawable.none12 };
-	private String[] texts = { "野生动物", "林中和林下植物", "土壤微生物", "非定制", "定制", "敬请期待",
-			"", "", "", "", "", "" };
+	private int[] images = { R.drawable.anim, R.drawable.plant, R.drawable.soil, R.drawable.custommade,
+			R.drawable.nocustommade, R.drawable.more, R.drawable.none7, R.drawable.none8, R.drawable.none9,
+			R.drawable.none10, R.drawable.none11, R.drawable.none12 };
+	private String[] texts = { "野生动物", "林中和林下植物", "土壤微生物", "非定制", "定制", "敬请期待", "", "", "", "", "", "" };
 	// private List<String>
 	FragmentManager fManager;
 	FragmentTransaction ft;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fg1, container, false);
 		activity = (MainActivity) this.getActivity();
 		fManager = activity.getSupportFragmentManager();
@@ -37,13 +33,11 @@ public class Fragment1 extends Fragment {
 		Display display = windowManager.getDefaultDisplay();
 		@SuppressWarnings("deprecation")
 		int wh = display.getWidth();
-		GridItemAdapter adapter = new GridItemAdapter(images, texts,
-				this.getActivity(), wh);
+		GridItemAdapter adapter = new GridItemAdapter(images, texts, this.getActivity(), wh);
 		gridView.setAdapter(adapter);
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 				ft = fManager.beginTransaction();
 				switch (position) {
 				case 0:
@@ -74,7 +68,13 @@ public class Fragment1 extends Fragment {
 					ft.commit();
 					break;
 				case 3:
-
+					if (activity.non == null) {
+						activity.non = new NonCustomMade();
+						ft.add(R.id.content, activity.non);
+					}
+					ft.hide(activity.fg1);
+					ft.show(activity.non);
+					ft.commit();
 					break;
 				case 4:
 					if (activity.fg6 == null) {

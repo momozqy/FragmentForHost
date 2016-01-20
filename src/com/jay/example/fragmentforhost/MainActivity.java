@@ -1,6 +1,8 @@
 package com.jay.example.fragmentforhost;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import android.R.color;
 import android.app.PendingIntent;
@@ -33,7 +35,7 @@ import com.jay.example.db.DataSQLiteHelper;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
 
-	public DataSQLiteHelper dh;
+	public static DataSQLiteHelper dh;
 	// 第一个界面 主要功能展示界面
 	public Fragment1 fg1;
 	// 第二个界面 读出数据 展示界面
@@ -52,8 +54,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	public CustomMade fg6;
 	// 历史记录界面
 	public MyMade log;
-	// handler
-	Handler mHandler;
+	//
+	public NonCustomMade non;
+
+	public HistoryLog his;
 	public NfcAdapter nfcAdapter;
 	private FrameLayout flayout;
 	public String readResult = "";
@@ -116,23 +120,20 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		if (!ifNFCUse()) {
 			System.out.println("is not use");
 		} // 将被调用的Intent，用于重复被Intent触发后将要执行的跳转
-		pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
-				getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
+		pendingIntent = PendingIntent.getActivity(this, 0,
+				new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
 		System.out.println("pengdinng Intent");
 		// * 设定要过滤的标签动作，这里只接收ACTION_NDEF_DISCOVERED类型
 		ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
 		System.out.println("ndef");
 		ndef.addCategory("*");
 		mFilters = new IntentFilter[] { ndef };// 过滤器
-		mTechLists = new String[][] { new String[] { NfcA.class.getName() },
-				new String[] { NfcF.class.getName() },
-				new String[] { NfcB.class.getName() },
-				new String[] { NfcV.class.getName() } };
+		mTechLists = new String[][] { new String[] { NfcA.class.getName() }, new String[] { NfcF.class.getName() },
+				new String[] { NfcB.class.getName() }, new String[] { NfcV.class.getName() } };
 		// 允许扫描的标签类型
 
 		if (isFirst) {
-			if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent()
-					.getAction())) {
+			if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
 				System.out.println(getIntent().getAction());
 				if (readFromTag(getIntent())) { // ifo_NFC.setText(readResult);
 					System.out.println("1.5...");
@@ -208,15 +209,20 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			found_image.setImageResource(R.drawable.ic_tabbar_found_pressed);
 			found_text.setTextColor(Color.parseColor(blue));
 			found_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
-			transaction.show(fg2);
+			if (fg2 == null) {
+				// 如果fg1为空，则创建一个并添加到界面上
+				fg2 = new Fragment2();
+				transaction.add(R.id.content, fg2);
+			} else {
+				// 如果MessageFragment不为空，则直接将它显示出来
+				transaction.show(fg2);
+			}
 			break;
 
 		case 2:
-			settings_image
-					.setImageResource(R.drawable.ic_tabbar_settings_pressed);
+			settings_image.setImageResource(R.drawable.ic_tabbar_settings_pressed);
 			settings_text.setTextColor(Color.parseColor(blue));
-			settings_layout
-					.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
+			settings_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
 			if (fg3 == null) {
 				fg3 = new Fragment3();
 				transaction.add(R.id.content, fg3);
@@ -267,6 +273,11 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		if (soil != null) {
 			transaction.hide(soil);
 		}
+		if (non != null)
+			transaction.hide(non);
+		if (his != null) {
+			transaction.hide(his);
+		}
 	}
 
 	public void clearChioce() {
@@ -308,8 +319,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	 * @return
 	 */
 	private boolean readFromTag(Intent intent) {
-		Parcelable[] rawArray = intent
-				.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+		Parcelable[] rawArray = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 		if (rawArray != null) {
 			NdefMessage mNdefMsg = (NdefMessage) rawArray[0];
 			NdefRecord mNdefRecord = mNdefMsg.getRecords()[0];
@@ -330,8 +340,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onResume();
 		// 前台分发系统,这里的作用在于第二次检测NFC标签时该应用有最高的捕获优先权.
-		nfcAdapter.enableForegroundDispatch(this, pendingIntent, mFilters,
-				mTechLists);
+		nfcAdapter.enableForegroundDispatch(this, pendingIntent, mFilters, mTechLists);
 
 		System.out.println("onResume...");
 	}
@@ -367,7 +376,18 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	}
 
-	public void setHanlder(Handler handler) {
-		mHandler = handler;
+	public static String GetNowDate() {
+		String temp_str = "";
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		temp_str = sdf.format(dt);
+		return temp_str;
+	}
+
+	@Override
+	protected void onDestroy() {
+		if (dh != null)
+			dh.close();
+		super.onDestroy();
 	}
 }

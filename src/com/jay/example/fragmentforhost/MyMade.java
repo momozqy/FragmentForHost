@@ -23,15 +23,14 @@ public class MyMade extends Fragment {
 	MainActivity mActivity;
 	DataSQLiteHelper dh;
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.mymade, container, false);
 		mActivity = (MainActivity) this.getActivity();
 		dh = mActivity.getDataSQLiteHelper();
 		historyList = (ListView) view.findViewById(R.id.historyList);
 		list = new ArrayList<List<String>>();
 		SQLiteDatabase db = dh.getReadableDatabase();
-		Cursor cs = db.rawQuery("select * from DATA", null);
+		Cursor cs = db.rawQuery("select * from MAKE", null);
 		while (cs.moveToNext()) {
 			String attrs = cs.getString(cs.getColumnIndex("atrrs"));
 			String date = cs.getString(cs.getColumnIndex("time"));
@@ -43,13 +42,11 @@ public class MyMade extends Fragment {
 			liststr.add(date);
 			list.add(liststr);
 		}
-		MadeListViewAdapter adapter = new MadeListViewAdapter(
-				this.getActivity(), list);
+		MadeListViewAdapter adapter = new MadeListViewAdapter(this.getActivity(), list);
 		historyList.setAdapter(adapter);
 		historyList.setOnItemClickListener(new OnItemClickListener() {
 
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int position, long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 				int id = position + 1;
 
 			}

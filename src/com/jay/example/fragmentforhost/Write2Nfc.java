@@ -97,7 +97,6 @@ public class Write2Nfc extends Activity {
 					NdefMessage ndefMessage = new NdefMessage(records);
 					ndef.writeNdefMessage(ndefMessage);
 					System.out.println("3....");
-					Toast.makeText(getApplicationContext(), text + "数据写入成功!", Toast.LENGTH_SHORT).show();
 
 					SQLiteDatabase db = dh.getWritableDatabase();
 					ContentValues cv = new ContentValues();
@@ -105,13 +104,7 @@ public class Write2Nfc extends Activity {
 					cv.put("atrrs", text);
 					cv.put("num", getIntent().getIntExtra("num", 6));
 					cv.put("time", String.valueOf(getIntent().getStringExtra("time")));
-
-					if (db.insert("DATA", null, cv) == -1) {
-						Toast.makeText(Write2Nfc.this, "插入失败", Toast.LENGTH_SHORT).show();
-					} else {
-						Toast.makeText(Write2Nfc.this, "插入成功", Toast.LENGTH_SHORT).show();
-						this.finish();
-					}
+					db.insert("DATA", null, cv);
 					displayControl(false);
 				} catch (IOException e1) {
 					e1.printStackTrace();

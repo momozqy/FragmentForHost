@@ -80,6 +80,9 @@ public class CustomMade extends Fragment implements OnClickListener {
 				Intent in = new Intent();
 				in.setClass(mActivity, Write2Nfc.class);
 				in.putExtra("content", save());
+				in.putExtra("type", "定制");
+				in.putExtra("num", textList.size() / 2);
+				in.putExtra("time", mActivity.GetNowDate());
 				mActivity.startActivity(in);
 			}
 			break;
@@ -110,14 +113,12 @@ public class CustomMade extends Fragment implements OnClickListener {
 				sb.append(textList.get(i).getText().toString());
 		}
 		String content = sb.toString().trim();
-		String date = GetNowDate();
+		String date = mActivity.GetNowDate();
 		SQLiteDatabase db = dh.getWritableDatabase();
 		ContentValues cv = new ContentValues();
-		cv.put("type", "定制");
-		cv.put("content", content);
-		cv.put("num", textList.size() / 2);
-		cv.put("time", GetNowDate());
-		if (db.insert("DATA", null, cv) == -1) {
+		cv.put("atrrs", content);
+		cv.put("time", date);
+		if (db.insert("MAKE", null, cv) == -1) {
 			Toast.makeText(mActivity, "保存失败", Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(mActivity, "保存成功", Toast.LENGTH_SHORT).show();
@@ -148,13 +149,5 @@ public class CustomMade extends Fragment implements OnClickListener {
 		data.addView(name);
 		data.addView(content);
 		datas.addView(data);
-	}
-
-	public String GetNowDate() {
-		String temp_str = "";
-		Date dt = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		temp_str = sdf.format(dt);
-		return temp_str;
 	}
 }
