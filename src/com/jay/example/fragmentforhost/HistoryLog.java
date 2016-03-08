@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.jay.example.adapter.MadeListViewAdapter;
 import com.jay.example.db.DataSQLiteHelper;
@@ -48,7 +49,7 @@ public class HistoryLog extends Fragment {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 				int id = position + 1;
-
+				Toast.makeText(mActivity, "点击了 " + id, Toast.LENGTH_SHORT).show();
 			}
 		});
 		cs.close();
