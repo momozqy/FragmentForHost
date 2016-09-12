@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="土壤微生物"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@android:color/white"
             />
     </RelativeLayout>
@@ -42,7 +42,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="群落组成和多样性:"
+		    android:text="种    类:"
 		    android:background="@null"
 		    />
 		<EditText 
@@ -50,7 +50,7 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="土壤微生物的群落组成和多样性"
+		    android:hint="请输入微生物种类"
 		    />        
     </LinearLayout>
     <LinearLayout 
@@ -73,7 +73,7 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="请输入土壤微生物生物量"
+		    android:hint="请输入微生物生物量"
 		    />        
     </LinearLayout>
     <LinearLayout 
@@ -84,19 +84,19 @@
         android:layout_marginTop="10dp"
         >
 		<EditText 
-		    android:id="@+id/microb_activity"
+		    android:id="@+id/sdistribute"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="活性:"
+		    android:text="分    布:"
 		    android:background="@null"
 		    />
 		<EditText 
-		    android:id="@+id/microb_activityc"
+		    android:id="@+id/sdistributec"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="请输入土壤微生物活性"
+		    android:hint="请输入微生物分布范围"
 		    />        
     </LinearLayout>
       <LinearLayout 
@@ -107,46 +107,49 @@
         android:layout_marginTop="10dp"
         >
 		<EditText 
-		    android:id="@+id/enzymatic_activity"
+		    android:id="@+id/sfeature"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="酶活性:"
+		    android:text="活动规律:"
 		    android:background="@null"
 		    />
 		<EditText 
-		    android:id="@+id/enzymatic_activityc"
+		    android:id="@+id/sfeaturec"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="请输入土壤酶活性"
+		    android:hint="请输入微生物活动规律"
 		    />        
-    </LinearLayout>    
+    </LinearLayout>
+             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp">
+
+                <Button
+                    android:id="@id/next"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="下一步" />
+                <Button
+                    android:id="@id/change"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/next"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="修改"
+                    android:visibility="invisible" />
+
+                
+            </RelativeLayout>
 </LinearLayout>
 </ScrollView>
-
-    <Button
-        android:id="@+id/next"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" 
-        android:layout_marginTop="10dp"
-        android:layout_alignParentBottom="true"
-        android:text="下一步"
-        />
-	 <Button
-        android:id="@+id/change"
-        android:layout_above="@id/next"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="修改"
-        android:visibility="invisible"
-         />
-  
+      
 </RelativeLayout>

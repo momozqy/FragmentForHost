@@ -2,174 +2,385 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
-    <ScrollView 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
-<LinearLayout
-    android:id="@+id/datas"
-    android:layout_width="fill_parent"
-    android:layout_height="200dp"
-    android:orientation="vertical"
-    >
-    <RelativeLayout
-        android:id="@+id/title" 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@drawable/top_bg"
-        >
-        <TextView 
-            android:id="@+id/biaot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="动物"
-            android:textSize="25sp"
-            android:textColor="@android:color/white"
-            />
-    </RelativeLayout>
-    <LinearLayout 
-        android:id="@+id/data1"
-        android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        >
-		<EditText 
-		    android:id="@+id/name"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:editable="false"
-		    android:text="中文名:"
-		    android:background="@null"
-		    />
-		<EditText 
-		    android:id="@+id/namec"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:editable="true"
-		    android:hint="请输入动物中文名"
-		    />        
-    </LinearLayout>
-    <LinearLayout 
-        android:id="@+id/data2"
-        android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        >
-		<EditText 
-		    android:id="@+id/ename"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:editable="false"
-		    android:text="英文名字:"
-		    android:background="@null"
-		    />
-		<EditText 
-		    android:id="@+id/enamec"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:editable="true"
-		    android:hint="请输入动物英文名"
-		    />        
-    </LinearLayout>
-    <LinearLayout 
-        android:id="@+id/data3"
-        android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        >
-		<EditText 
-		    android:id="@+id/latiname"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:editable="false"
-		    android:text="拉丁名:"
-		    android:background="@null"
-		    />
-		<EditText 
-		    android:id="@+id/latinamec"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:editable="true"
-		    android:hint="请输入动物拉丁名"
-		    />        
-    </LinearLayout>
-    <LinearLayout 
-        android:id="@+id/data4"
-        android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        >
-		<EditText 
-		    android:id="@+id/distribute"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:editable="false"
-		    android:text="分布:"
-		    android:background="@null"
-		    />
-		<EditText 
-		    android:id="@+id/distributec"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:editable="true"
-		    android:hint=""
-		    />        
-    </LinearLayout>
-     <LinearLayout 
-        android:id="@+id/data5"
-        android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        >
-		<EditText 
-		    android:id="@+id/feature"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:editable="false"
-		    android:text="习性:"
-		    android:background="@null"
-		    />
-		<EditText 
-		    android:id="@+id/featurec"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:editable="true"
-		    android:hint=""
-		    />        
-    </LinearLayout>
-</LinearLayout>
-</ScrollView>
-	 <Button
-        android:id="@id/change"
-        android:layout_above="@id/next"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="修改"
-        android:visibility="invisible"
-         />
+    android:background="#ffffff" >
 
-    <Button
-        android:id="@id/next"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" 
-        android:layout_marginTop="10dp"
-        android:layout_alignParentBottom="true"
-        android:text="下一步"
-        />
-    
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/datas"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/top_bg"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/biaot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="野生动物"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/data1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="中文名:" />
+
+                <EditText
+                    android:id="@+id/namec"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的中文名" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/pinyin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="拼    音:" />
+
+                <EditText
+                    android:id="@+id/pinyinc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物名字的拼音" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/ename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="英文名:" />
+
+                <EditText
+                    android:id="@+id/enamec"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物英文名" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/latiname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="拉丁名:" />
+
+                <EditText
+                    android:id="@+id/latinamec"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的拉丁名" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/jie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="界        :" />
+
+                <EditText
+                    android:id="@+id/jiec"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的界" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/men"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="门        :" />
+
+                <EditText
+                    android:id="@+id/menc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的门" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data7"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/gang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="纲        :" />
+
+                <EditText
+                    android:id="@+id/gangc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的纲" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data8"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/mu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="目        :" />
+
+                <EditText
+                    android:id="@+id/muc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的目" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data9"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/ke"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="科        :" />
+
+                <EditText
+                    android:id="@+id/kec"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的科" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data10"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/shu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="属        :" />
+
+                <EditText
+                    android:id="@+id/shuc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的属" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data11"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/zhong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="种        :" />
+
+                <EditText
+                    android:id="@+id/zhongc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的种" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data12"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/distribute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="分    布:" />
+
+                <EditText
+                    android:id="@+id/distributec"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的分布" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data13"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/feature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="习    性:" />
+
+                <EditText
+                    android:id="@+id/featurec"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的习性" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/data14"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:editable="false"
+                    android:text="保护等级:" />
+
+                <EditText
+                    android:id="@+id/levelc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="true"
+                    android:hint="请输入野生动物的保护 " />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp">
+
+                <Button
+                    android:id="@id/next"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="下一步" />
+                <Button
+                    android:id="@id/change"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/next"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="修改"
+                    android:visibility="invisible" />
+
+                
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>

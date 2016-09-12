@@ -10,7 +10,7 @@ public class DataSQLiteHelper extends SQLiteOpenHelper {
 
 	private static final int VERSION = 1;
 	private static String CREATE_DATA_TAB = "CREATE TABLE IF NOT EXISTS DATA(id INTEGER PRIMARY KEY autoincrement,type text,atrrs text,num int,time text)";
-	private static String CREATE_MADE_TAB = "CREATE TABLE IF NOT EXISTS MAKE(id INTEGER PRIMARY KEY autoincrement,atrrs text,time text)";
+	private static String CREATE_MADE_TAB = "CREATE TABLE IF NOT EXISTS MAKE(id INTEGER PRIMARY KEY autoincrement,title text,atrrs text,time text)";
 
 	public DataSQLiteHelper(Context context, String name, CursorFactory factory, int version) {
 		// TODO Auto-generated constructor stub

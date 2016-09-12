@@ -25,7 +25,7 @@ public class Fragment3 extends Fragment {
 		list = (ListView) view.findViewById(R.id.mineOrder);
 		mActivity = (MainActivity) this.getActivity();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1,
-				new String[] { "我的定制", "历史记录" });
+				new String[] { "已保存", "已写入" ,"我的定制"});
 		biaot = (TextView) view.findViewById(R.id.biaot);
 		fm = mActivity.getSupportFragmentManager();
 		biaot.setText("NFC-RW");
@@ -52,12 +52,22 @@ public class Fragment3 extends Fragment {
 						mActivity.his = new HistoryLog();
 						ft.add(R.id.content, mActivity.his);
 					} else {
-						ft.remove(mActivity.log);
-						mActivity.log = new MyMade();
+						ft.remove(mActivity.his);
+						mActivity.his = new HistoryLog();
 						ft.add(R.id.content, mActivity.his);
 					}
 					ft.hide(mActivity.fg3);
 					ft.show(mActivity.his);
+					ft.commit();
+				}
+				if(position == 2){
+					if(mActivity.made != null){
+						ft.remove(mActivity.made);
+					}
+					mActivity.made = new MyMadeClass();
+					ft.add(R.id.content, mActivity.made);
+					ft.hide(mActivity.fg3);
+					ft.show(mActivity.made);
 					ft.commit();
 				}
 			}

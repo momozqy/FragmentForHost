@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/top_bg" >
-
+	
+    
     <TextView
         android:id="@+id/biaot"
         android:layout_width="wrap_content"

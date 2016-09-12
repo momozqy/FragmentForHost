@@ -1,10 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+    <include android:id="@id/app_title" layout="@layout/app_title"/>
+  	<LinearLayout 
+  	    android:id="@+id/ll_attr"
+  	    android:layout_width="match_parent"
+  	    android:layout_height="wrap_content"
+  	    android:layout_marginTop="60dp"
+  	    android:gravity="center"
+		android:orientation="horizontal"
+		android:visibility="invisible"
+  	    >
+  	    <TextView 
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="match_parent"
+  	        android:layout_weight="1"
+  	        android:gravity="center"
+  	        android:text="属性名"
+  	        />
+  	    <TextView 
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="match_parent"
+  	        android:gravity="center"
+  	        android:text="属性值"
+  	        android:layout_weight="3"
+  	        />
+  	</LinearLayout>  
+  	<ScrollView 
+  	    android:id="@+id/sc"
+  	    android:layout_below="@id/ll_attr"
+  	    android:layout_width="match_parent"
+  	    android:layout_height="match_parent"
+  	    >
+  	    <RelativeLayout 
+  	        android:layout_width="match_parent"
+  	        android:layout_height="wrap_content">
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center"
     android:id="@+id/ll_read"
     android:background="#FFFFFF"
     android:orientation="vertical" >
-	
-</LinearLayout>
+    
+	</LinearLayout>
+	<Button
+        android:id="@+id/change2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_read"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="100dp"
+        android:text="修改"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/write"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/change2"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="写入"
+        android:visibility="invisible" />
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

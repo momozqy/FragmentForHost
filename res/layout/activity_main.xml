@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="读取"
+                    android:text="写入"
                     android:textColor="#000000" />
   
             </LinearLayout>  
@@ -69,7 +69,7 @@
                     android:layout_width="wrap_content"  
                     android:layout_height="wrap_content"  
                     android:layout_gravity="center_horizontal"  
-                    android:text="写入"  
+                    android:text="读取"  
                     android:textColor="#000000"/>  
             </LinearLayout>  
         </RelativeLayout>  

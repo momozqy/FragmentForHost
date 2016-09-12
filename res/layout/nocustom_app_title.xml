@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nocustom_app_title"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_bg" >
+	
+    
+    <TextView
+        android:id="@+id/biaot2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="非定制"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+    <TextView 
+        android:id="@+id/right_text"
+        android:layout_width="wrap_content"
+        android:layout_height = "wrap_content"
+ 		android:layout_alignParentRight="true"
+ 		android:layout_centerVertical="true"
+ 		android:layout_marginRight="5dp"
+ 		android:text=""
+ 		android:textColor="@android:color/white"
+ 		android:textSize="20sp"
+      />
+</RelativeLayout>

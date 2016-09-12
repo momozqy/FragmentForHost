@@ -50,8 +50,7 @@ public class MadeListViewAdapter extends BaseAdapter {
 		if (convertView == null) {
 			item = new Data();
 			convertView = inflater.inflate(R.layout.list_item, null);
-			item.datas = (LinearLayout) convertView
-					.findViewById(R.id.list_datas);
+			item.datas = (LinearLayout) convertView.findViewById(R.id.list_datas);
 			item.date = (TextView) convertView.findViewById(R.id.date);
 			convertView.setTag(item);
 		} else {
@@ -73,6 +72,10 @@ public class MadeListViewAdapter extends BaseAdapter {
 		}
 		item.date.setText(list.get(i));
 		return convertView;
+	}
+
+	public void clear() {
+		// TODO Auto-generated method stub
 	}
 
 }

@@ -1,15 +1,12 @@
 package com.jay.example.fragmentforhost;
 
-import com.jay.example.db.DataSQLiteHelper;
-
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,14 +40,17 @@ public class NonCustomMade extends Fragment implements OnClickListener {
 			if (next.getText().toString().equals("下一步")) {
 				next.setText("写入");
 				change.setVisibility(View.VISIBLE);
+				input.setEnabled(false);
 			} else {
 				Intent in = new Intent();
 				in.setClass(mActivity, Write2Nfc.class);
-				in.putExtra("content", input.getText().toString().trim());
+				String content = input.getText().toString().trim();
+				if(content.equals(""))content = " ";
+				in.putExtra("content", content);
 				in.putExtra("num", 1);
 				in.putExtra("type", "非定制");
 				in.putExtra("time", mActivity.GetNowDate());
-				mActivity.startActivity(in);
+				mActivity.startActivityForResult(in, 1);
 			}
 			break;
 		case R.id.change:

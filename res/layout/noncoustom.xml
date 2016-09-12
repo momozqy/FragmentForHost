@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical" >
-    <include layout="@layout/app_title" android:id="@id/app_title"/>
+    <include layout="@layout/nocustom_app_title" android:id="@id/nocustom_app_title"/>
 	<EditText 
 	    android:id="@+id/input"
 	    android:layout_width="match_parent"
@@ -15,7 +15,7 @@
 	    android:layout_marginLeft="16dp"
 	    android:layout_marginRight="16dp"
 	    android:background="@drawable/edit_bg"
-	    android:hint="please input anything"
+	    android:hint="请输入您需要写入的内容"
 	    />
 	
     <Button

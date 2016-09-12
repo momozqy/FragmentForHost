@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="植物"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@android:color/white"
             />
     </RelativeLayout>
@@ -38,7 +38,7 @@
         android:layout_marginTop="10dp"
         >
 		<EditText 
-		    android:id="@+id/chname"
+		    android:id="@+id/pname"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
@@ -46,14 +46,14 @@
 		    android:background="@null"
 		    />
 		<EditText 
-		    android:id="@+id/chnamec"
+		    android:id="@+id/pnamec"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="请输入动物中文名"
+		    android:hint="请输入植物的中文名"
 		    />        
     </LinearLayout>
-    <LinearLayout 
+     <LinearLayout 
         android:id="@+id/data2"
         android:layout_width="fill_parent"
        android:layout_height="wrap_content"
@@ -61,19 +61,19 @@
         android:layout_marginTop="10dp"
         >
 		<EditText 
-		    android:id="@+id/otname"
+		    android:id="@+id/ppinyin"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="别名:"
+		    android:text="拼    音:"
 		    android:background="@null"
 		    />
 		<EditText 
-		    android:id="@+id/otnamec"
+		    android:id="@+id/ppinyinc"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="请输入植物别名"
+		    android:hint="请输入植物名字的拼音"
 		    />        
     </LinearLayout>
     <LinearLayout 
@@ -84,22 +84,22 @@
         android:layout_marginTop="10dp"
         >
 		<EditText 
-		    android:id="@+id/latiname"
+		    android:id="@+id/pename"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="拉丁名:"
+		    android:text="英文名:"
 		    android:background="@null"
 		    />
 		<EditText 
-		    android:id="@+id/latinamec"
+		    android:id="@+id/penamec"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="请输入植物拉丁名"
+		    android:hint="请输入植物的英文名"
 		    />        
     </LinearLayout>
-      <LinearLayout 
+    <LinearLayout 
         android:id="@+id/data4"
         android:layout_width="fill_parent"
        android:layout_height="wrap_content"
@@ -107,22 +107,22 @@
         android:layout_marginTop="10dp"
         >
 		<EditText 
-		    android:id="@+id/family"
+		    android:id="@+id/platiname"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="科名:"
+		    android:text="拉丁名:"
 		    android:background="@null"
 		    />
 		<EditText 
-		    android:id="@+id/familyc"
+		    android:id="@+id/platinamec"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="请输入植物科名"
+		    android:hint="请输入植物的拉丁名"
 		    />        
     </LinearLayout>
-      <LinearLayout 
+     <LinearLayout 
         android:id="@+id/data5"
         android:layout_width="fill_parent"
        android:layout_height="wrap_content"
@@ -130,22 +130,21 @@
         android:layout_marginTop="10dp"
         >
 		<EditText 
-		    android:id="@+id/name"
+		    android:id="@+id/pjie"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="属名:"
+		    android:text="界        :"
 		    android:background="@null"
 		    />
 		<EditText 
-		    android:id="@+id/namec"
+		    android:id="@+id/pjiec"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint="请输入植物属名"
+		    android:hint="请输入植物的界"
 		    />        
     </LinearLayout>
-   
      <LinearLayout 
         android:id="@+id/data6"
         android:layout_width="fill_parent"
@@ -154,47 +153,235 @@
         android:layout_marginTop="10dp"
         >
 		<EditText 
-		    android:id="@+id/feature"
+		    android:id="@+id/pmen"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:editable="false"
-		    android:text="习性:"
+		    android:text="门        :"
 		    android:background="@null"
 		    />
 		<EditText 
-		    android:id="@+id/featurec"
+		    android:id="@+id/pmenc"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:editable="true"
-		    android:hint=""
+		    android:hint="请输入植物的门"
 		    />        
     </LinearLayout>
+     <LinearLayout 
+        android:id="@+id/data7"
+        android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+		<EditText 
+		    android:id="@+id/pgang"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:editable="false"
+		    android:text="纲        :"
+		    android:background="@null"
+		    />
+		<EditText 
+		    android:id="@+id/pgangc"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:editable="true"
+		    android:hint="请输入植物的纲"
+		    />        
+    </LinearLayout>
+     <LinearLayout 
+        android:id="@+id/data8"
+        android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+		<EditText 
+		    android:id="@+id/pmu"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:editable="false"
+		    android:text="目        :"
+		    android:background="@null"
+		    />
+		<EditText 
+		    android:id="@+id/pmuc"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:editable="true"
+		    android:hint="请输入植物的目"
+		    />        
+    </LinearLayout>
+     <LinearLayout 
+        android:id="@+id/data9"
+        android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+		<EditText 
+		    android:id="@+id/pke"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:editable="false"
+		    android:text="科        :"
+		    android:background="@null"
+		    />
+		<EditText 
+		    android:id="@+id/pkec"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:editable="true"
+		    android:hint="请输入植物的科"
+		    />        
+    </LinearLayout>
+     <LinearLayout 
+        android:id="@+id/data10"
+        android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+		<EditText 
+		    android:id="@+id/pshu"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:editable="false"
+		    android:text="属        :"
+		    android:background="@null"
+		    />
+		<EditText 
+		    android:id="@+id/pshuc"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:editable="true"
+		    android:hint="请输入植物的属"
+		    />        
+    </LinearLayout>
+     <LinearLayout 
+        android:id="@+id/data11"
+        android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+		<EditText 
+		    android:id="@+id/pzhong"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:editable="false"
+		    android:text="种        :"
+		    android:background="@null"
+		    />
+		<EditText 
+		    android:id="@+id/pzhongc"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:editable="true"
+		    android:hint="请输入植物的种"
+		    />        
+    </LinearLayout>
+    <LinearLayout 
+        android:id="@+id/data12"
+        android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+		<EditText 
+		    android:id="@+id/pdistribute"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:editable="false"
+		    android:text="分    布:"
+		    android:background="@null"
+		    />
+		<EditText 
+		    android:id="@+id/pdistributec"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:editable="true"
+		    android:hint="请输入植物的分布"
+		    />        
+    </LinearLayout>
+     <LinearLayout 
+        android:id="@+id/data13"
+        android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+		<EditText 
+		    android:id="@+id/pfeature"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:editable="false"
+		    android:text="习    性:"
+		    android:background="@null"
+		    />
+		<EditText 
+		    android:id="@+id/pfeaturec"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:editable="true"
+		    android:hint="请输入植物的习性"
+		    />        
+    </LinearLayout>
+     <LinearLayout 
+        android:id="@+id/data14"
+        android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+		<EditText 
+		    android:id="@+id/plevel"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:editable="false"
+		    android:text="保护等级:"
+		    android:background="@null"
+		    />
+		<EditText 
+		    android:id="@+id/plevelc"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:editable="true"
+		    android:hint="请输入植物的保护等级"
+		    />        
+    </LinearLayout>
+         <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp">
+
+                <Button
+                    android:id="@id/next"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="下一步" />
+                <Button
+                    android:id="@id/change"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/next"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="修改"
+                    android:visibility="invisible" />
+
+                
+            </RelativeLayout>
 </LinearLayout>
 </ScrollView>
 
-    <Button
-        android:id="@+id/next"
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" 
-        android:layout_marginTop="10dp"
-        android:layout_alignParentBottom="true"
-        android:text="下一步"
-        />
-	 <Button
-        android:id="@+id/change"
-        android:layout_above="@id/next"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="修改"
-        android:visibility="invisible"
-         />
-
+    
     
 </RelativeLayout>

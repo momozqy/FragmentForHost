@@ -3,11 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <include layout="@layout/app_title" android:id="@id/app_title"/>
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_bg" >
+        <TextView
+            android:id="@+id/biaot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="历史记录"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="清除"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+    </RelativeLayout>
 	<ListView 
 	    android:id="@+id/historyList"
 		android:layout_width="fill_parent"
-		android:layout_below="@id/app_title"
+		android:layout_below="@id/title"
 		android:layout_height="wrap_content"
 		android:cacheColorHint="#00000000"
 		android:background="#FFFFFF"

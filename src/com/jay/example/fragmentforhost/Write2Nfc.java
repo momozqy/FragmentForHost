@@ -19,6 +19,7 @@ import android.nfc.tech.NfcB;
 import android.nfc.tech.NfcF;
 import android.nfc.tech.NfcV;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,7 +33,6 @@ public class Write2Nfc extends Activity {
 	PendingIntent pendingIntent;
 	String[][] mTechLists;
 	private Boolean ifWrite;
-
 	DataSQLiteHelper dh;
 
 	@Override
@@ -69,6 +69,16 @@ public class Write2Nfc extends Activity {
 			return;
 		}
 		img.setBackgroundResource(R.drawable.success);
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+
+			public void run() {
+				Intent in = new Intent();
+				in.putExtra("result", "success");
+				Write2Nfc.this.setResult(RESULT_OK,in);
+				Write2Nfc.this.finish();
+			}
+		}, 300);
 	}
 
 	@Override
@@ -100,11 +110,15 @@ public class Write2Nfc extends Activity {
 
 					SQLiteDatabase db = dh.getWritableDatabase();
 					ContentValues cv = new ContentValues();
-					cv.put("type", String.valueOf(getIntent().getStringExtra("type")));
+					String type = String.valueOf(getIntent().getStringExtra("type"));
+					cv.put("type", type);
 					cv.put("atrrs", text);
 					cv.put("num", getIntent().getIntExtra("num", 6));
 					cv.put("time", String.valueOf(getIntent().getStringExtra("time")));
 					db.insert("DATA", null, cv);
+					if(type.equals("定制")){
+						db.delete("MAKE","atrrs=?",new String []{text});
+					}
 					displayControl(false);
 				} catch (IOException e1) {
 					e1.printStackTrace();

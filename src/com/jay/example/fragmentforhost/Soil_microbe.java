@@ -3,9 +3,7 @@ package com.jay.example.fragmentforhost;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,8 +20,8 @@ public class Soil_microbe extends Fragment {
 	public static View content;
 	EditText variety;
 	EditText biomass;
-	EditText microb_activity;
-	EditText enzymatic_activity;
+	EditText sdis;
+	EditText sfeature;
 	Button next;
 	Button change;
 	DataSQLiteHelper dh;
@@ -37,8 +35,8 @@ public class Soil_microbe extends Fragment {
 		activity = (MainActivity) getActivity();
 		variety = (EditText) view.findViewById(R.id.varietyc);
 		biomass = (EditText) view.findViewById(R.id.biomassc);
-		microb_activity = (EditText) view.findViewById(R.id.microb_activityc);
-		enzymatic_activity = (EditText) view.findViewById(R.id.enzymatic_activityc);
+		sdis = (EditText) view.findViewById(R.id.sdistributec);
+		sfeature= (EditText) view.findViewById(R.id.sfeaturec);
 		change = (Button) view.findViewById(R.id.change);
 		next = (Button) view.findViewById(R.id.next);
 		dh = activity.getDataSQLiteHelper();
@@ -51,32 +49,40 @@ public class Soil_microbe extends Fragment {
 					change.setVisibility(View.VISIBLE);
 					variety.setEnabled(false);
 					biomass.setEnabled(false);
-					microb_activity.setEnabled(false);
-					enzymatic_activity.setEnabled(false);
+					sdis.setEnabled(false);
+					sfeature.setEnabled(false);
 
 				} else {
 					Intent in = new Intent();
 					in.setClass(activity, Write2Nfc.class);
 					String str = variety.getText().toString().trim();
 					if (!str.equals("")) {
-						sb.append("群落组成和多样性:" + str + "#");
+						sb.append("种类:" + str + "#");
 					}
+					else
+						sb.append("种类:" + " " + "#");
 					str = biomass.getText().toString().trim();
 					if (!str.equals(""))
 						sb.append("生物量:" + str + "#");
-					str = microb_activity.getText().toString().trim();
+					else
+						sb.append("生物量:" + " " + "#");
+					str =sdis.getText().toString().trim();
 					if (!str.equals(""))
-						sb.append("微生物活性:" + str + "#");
-					str = enzymatic_activity.getText().toString().trim();
+						sb.append("分布:" + str + "#");
+					else
+						sb.append("分布:" + " " + "#");
+					str = sfeature.getText().toString().trim();
 					if (!str.equals("")) {
-						sb.append("酶活性:" + str);
+						sb.append("活动规律:" + str);
 					}
+					else
+						sb.append("活动规律:" + " " + "#");
 					String content = sb.toString().trim();
 					in.putExtra("content", content);
-					in.putExtra("type", "植物");
+					in.putExtra("type", "土壤微生物");
 					in.putExtra("num", 4);
 					in.putExtra("time", GetNowDate());
-					activity.startActivity(in);
+					activity.startActivityForResult(in, 1);
 				}
 			}
 		});
@@ -87,8 +93,8 @@ public class Soil_microbe extends Fragment {
 				next.setText("下一步");
 				variety.setEnabled(true);
 				biomass.setEnabled(true);
-				microb_activity.setEnabled(true);
-				enzymatic_activity.setEnabled(true);
+				sdis.setEnabled(true);
+				sfeature.setEnabled(true);
 			}
 		});
 		return view;

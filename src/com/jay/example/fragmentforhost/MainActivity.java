@@ -1,14 +1,26 @@
 package com.jay.example.fragmentforhost;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
 import android.R.color;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -17,11 +29,14 @@ import android.nfc.tech.NfcB;
 import android.nfc.tech.NfcF;
 import android.nfc.tech.NfcV;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Parcelable;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Images;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -50,26 +65,30 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	public Plant_resources plant;
 	// 土壤生物 写入界面
 	public Soil_microbe soil;
-	// 我的定制 写入界面
+	// 定制 写入界面
 	public CustomMade fg6;
 	// 历史记录界面
 	public MyMade log;
 	//
 	public NonCustomMade non;
-
+	//我的定制
+	public MyMadeClass made; 
+	//我的定制细节
+	public MymadeDetail detail;
+	
 	public HistoryLog his;
 	public NfcAdapter nfcAdapter;
 	private FrameLayout flayout;
 	public String readResult = "";
 	private RelativeLayout course_layout;
-	private RelativeLayout found_layout;
+	public RelativeLayout found_layout;
 	private RelativeLayout settings_layout;
 	private ImageView course_image;
-	private ImageView found_image;
+	public ImageView found_image;
 	private ImageView settings_image;
 	private TextView course_text;
 	private TextView settings_text;
-	private TextView found_text;
+	public TextView found_text;
 	private boolean isFirst = true;
 	private IntentFilter ndef;
 	private PendingIntent pendingIntent;
@@ -120,20 +139,23 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		if (!ifNFCUse()) {
 			System.out.println("is not use");
 		} // 将被调用的Intent，用于重复被Intent触发后将要执行的跳转
-		pendingIntent = PendingIntent.getActivity(this, 0,
-				new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
+		pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,
+				getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0); //
 		System.out.println("pengdinng Intent");
 		// * 设定要过滤的标签动作，这里只接收ACTION_NDEF_DISCOVERED类型
 		ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
 		System.out.println("ndef");
 		ndef.addCategory("*");
 		mFilters = new IntentFilter[] { ndef };// 过滤器
-		mTechLists = new String[][] { new String[] { NfcA.class.getName() }, new String[] { NfcF.class.getName() },
-				new String[] { NfcB.class.getName() }, new String[] { NfcV.class.getName() } };
+		mTechLists = new String[][] { new String[] { NfcA.class.getName() },
+				new String[] { NfcF.class.getName() },
+				new String[] { NfcB.class.getName() },
+				new String[] { NfcV.class.getName() } };
 		// 允许扫描的标签类型
 
 		if (isFirst) {
-			if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+			if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent()
+					.getAction())) {
 				System.out.println(getIntent().getAction());
 				if (readFromTag(getIntent())) { // ifo_NFC.setText(readResult);
 					System.out.println("1.5...");
@@ -209,20 +231,20 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			found_image.setImageResource(R.drawable.ic_tabbar_found_pressed);
 			found_text.setTextColor(Color.parseColor(blue));
 			found_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
-			if (fg2 == null) {
+			if (fg2 != null) 
 				// 如果fg1为空，则创建一个并添加到界面上
+				transaction.remove(fg2);
+				// 如果MessageFragment不为空，则直接将它显示出来
 				fg2 = new Fragment2();
 				transaction.add(R.id.content, fg2);
-			} else {
-				// 如果MessageFragment不为空，则直接将它显示出来
-				transaction.show(fg2);
-			}
 			break;
 
 		case 2:
-			settings_image.setImageResource(R.drawable.ic_tabbar_settings_pressed);
+			settings_image
+					.setImageResource(R.drawable.ic_tabbar_settings_pressed);
 			settings_text.setTextColor(Color.parseColor(blue));
-			settings_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
+			settings_layout
+					.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
 			if (fg3 == null) {
 				fg3 = new Fragment3();
 				transaction.add(R.id.content, fg3);
@@ -244,7 +266,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		// ft.remove(fg5);
 	}
 
-	private void hideFragments(FragmentTransaction transaction) {
+	void hideFragments(FragmentTransaction transaction) {
 		if (fg1 != null) {
 			transaction.hide(fg1);
 		}
@@ -277,6 +299,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			transaction.hide(non);
 		if (his != null) {
 			transaction.hide(his);
+		}
+		if(made != null){
+			transaction.hide(made);
+		}
+		if(detail!=null){
+			transaction.hide(detail);
 		}
 	}
 
@@ -319,7 +347,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	 * @return
 	 */
 	private boolean readFromTag(Intent intent) {
-		Parcelable[] rawArray = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+		Parcelable[] rawArray = intent
+				.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 		if (rawArray != null) {
 			NdefMessage mNdefMsg = (NdefMessage) rawArray[0];
 			NdefRecord mNdefRecord = mNdefMsg.getRecords()[0];
@@ -340,7 +369,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onResume();
 		// 前台分发系统,这里的作用在于第二次检测NFC标签时该应用有最高的捕获优先权.
-		nfcAdapter.enableForegroundDispatch(this, pendingIntent, mFilters, mTechLists);
+		nfcAdapter.enableForegroundDispatch(this, pendingIntent, mFilters,
+				mTechLists);
 
 		System.out.println("onResume...");
 	}
@@ -389,5 +419,166 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		if (dh != null)
 			dh.close();
 		super.onDestroy();
+	}
+
+	private static final int FILE_SELECT_CODE = 88;
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == FILE_SELECT_CODE)// 自定义的一个static final int常量
+		{
+			if (resultCode == RESULT_OK) {
+				
+				Toast.makeText(this, "22442", 3000).show();
+				// 得到文件的Uri
+				Uri uri = data.getData();
+				// ContentResolver resolver = getContentResolver();
+				// ContentResolver对象的getType方法可返回形如content://的Uri的类型
+				// 如果是一张图片，返回结果为image/jpeg或image/png等
+				// String fileType = resolver.getType(uri);
+				String string = uri.toString();
+				if (!TextUtils.isEmpty(string) && string.endsWith("xls")) {
+					File f = getFileByUri(uri);
+
+					test(f);
+
+					// do anything you want
+				} else {
+					Toast.makeText(MainActivity.this, "请选择Excel文件",
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+		}
+		if (requestCode == 1){
+			if (resultCode == RESULT_OK) {
+				FragmentTransaction transaction = fManager.beginTransaction();
+				clearChioce();
+				hideFragments(transaction);
+				course_image.setImageResource(R.drawable.ic_tabbar_course_pressed);
+				course_text.setTextColor(Color.parseColor(blue));
+				course_layout.setBackgroundResource(R.drawable.ic_tabbar_bg_click);
+				if (fg1 == null) {
+					// 如果fg1为空，则创建一个并添加到界面上
+					fg1 = new Fragment1();
+					transaction.add(R.id.content, fg1);
+				} else {
+					// 如果MessageFragment不为空，则直接将它显示出来
+					transaction.show(fg1);
+				}
+				removeOthers(transaction);
+				transaction.commitAllowingStateLoss();
+			}
+		}
+	}
+
+	private void test(File f) {
+		// AssetManager am = this.getAssets();
+		// InputStream is = null;
+		try {
+
+			// is = am.open("data.xls");
+			InputStream is = new FileInputStream(f);
+			// is=f.get
+			Workbook wb = Workbook.getWorkbook(is);
+			Sheet sheet = wb.getSheet(0);
+			int row = sheet.getRows();
+			int Column = sheet.getColumns();
+			HashMap<String, String> hm;
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < row; ++i) {
+				Cell cell = sheet.getCell(0, i);
+				if (TextUtils.isEmpty(cell.getContents())) {
+					break;
+				}
+				for (int j = 0; j < Column; j++) {
+					Cell cellarea = sheet.getCell(j, i);
+					if (TextUtils.isEmpty(cellarea.getContents())) {
+						break;
+					}
+					sb.append(cellarea.getContents()+"#");
+				}
+				sb.append("@");
+			}
+
+			String[] split = sb.toString().split("@");
+			Toast.makeText(this, sb.toString(), 3000).show();
+			for (String str : split) {
+//				if (str == null)
+//					return ;
+//				Toast.makeText(this, str, 3000).show();
+				String date = GetNowDate();
+				getDataSQLiteHelper();
+				SQLiteDatabase db = dh.getWritableDatabase();
+				ContentValues cv = new ContentValues();
+				cv.put("atrrs", str);
+				cv.put("time", date);
+				if (db.insert("MAKE", null, cv) == -1) {
+					Toast.makeText(this, "保存失败", Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+				}
+			}
+			
+//			Toast.makeText(MainActivity.this, sb.toString(), Toast.LENGTH_LONG)
+//					.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 通过Uri返回File文件 注意：通过相机的是类似content://media/external/images/media/97596
+	 * 通过相册选择的：file:///storage/sdcard0/DCIM/Camera/IMG_20150423_161955.jpg
+	 * 通过查询获取实际的地址
+	 * 
+	 * @param uri
+	 * @return
+	 */
+	public File getFileByUri(Uri uri) {
+		String path = null;
+		if ("file".equals(uri.getScheme())) {
+			path = uri.getEncodedPath();
+			if (path != null) {
+				path = Uri.decode(path);
+				ContentResolver cr = this.getContentResolver();
+				StringBuffer buff = new StringBuffer();
+				buff.append("(").append(Images.ImageColumns.DATA).append("=").append("'" + path + "'").append(")");
+				Cursor cur = cr.query(Images.Media.EXTERNAL_CONTENT_URI,
+						new String[] { Images.ImageColumns._ID, Images.ImageColumns.DATA }, buff.toString(), null,
+						null);
+				int index = 0;
+				int dataIdx = 0;
+				for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+					index = cur.getColumnIndex(Images.ImageColumns._ID);
+					index = cur.getInt(index);
+					dataIdx = cur.getColumnIndex(Images.ImageColumns.DATA);
+					path = cur.getString(dataIdx);
+				}
+				cur.close();
+				if (index == 0) {
+				} else {
+					Uri u = Uri.parse("content://media/external/images/media/" + index);
+					System.out.println("temp uri is :" + u);
+				}
+			}
+			if (path != null) {
+				return new File(path);
+			}
+		} else if ("content".equals(uri.getScheme())) {
+			// 4.2.2以后
+			String[] proj = { MediaStore.Images.Media.DATA };
+			Cursor cursor = this.getContentResolver().query(uri, proj, null, null, null);
+			if (cursor.moveToFirst()) {
+				int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+				path = cursor.getString(columnIndex);
+			}
+			cursor.close();
+
+			return new File(path);
+		} else {
+			Log.i("TAG", "Uri Scheme:" + uri.getScheme());
+		}
+		return null;
 	}
 }
